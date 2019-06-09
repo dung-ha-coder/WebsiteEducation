@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="manage/template/head::head"></head>
+
+<body class="app sidebar-mini rtl">
+	<!-- Navbar-->
+	<header th:replace="manage/template/header::header"> </header>
+	<!-- Sidebar menu-->
+	<aside th:replace="manage/template/sidebar::sidebar"></aside>
+
+	<div class="app-content">
+		<div class="row">
+			<div class="col col-md-12">
+				<h4>Thong tin</h4>
+
+			</div>
+
+			<div class="col col-md-12">
+				<footer th:replace="manage/template/footer::footer"></footer>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>

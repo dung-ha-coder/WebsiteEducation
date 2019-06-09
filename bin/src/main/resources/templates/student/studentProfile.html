@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="student/template/head::head"></head>
+
+<body>
+
+	<!-- Navigation -->
+	<nav th:replace="student/template/nav::nav"></nav>
+	<header th:replace="student/template/header::header"></header>
+	<!-- Page Content -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4">
+				<div th:replace="student/template/sidebar::sidebar"></div>
+			</div>
+			<!-- Post Content Column -->
+			<div class="col-lg-8">
+
+				<div class="card my-2">
+					<h5 class="card-header">Thông tin cá nhân</h5>
+				</div>
+
+				<div class="card my-2">
+					<div class="row">
+						<div class="col col-md-4">
+							<img th:src="@{/student/images/student.jpg}" class="img-fluid" />
+
+						</div>
+
+						<div class="col col-md-8 card-body thong_tin_user">
+							<p th:text=" 'Họ và tên: ' +${user.fullname} ">Fullname: Ha
+								Tien Dung</p>
+							<p th:text=" 'Ngày sinh: ' + ${#dates.format(user.ngaySinh, 'dd-MM-yyyy')}" >
+								Ngay sinh: 222222 </p>
+							<p th:text=" 'Khoa quản lý: ' + ${user.khoa.tenKhoa} ">Khoa:
+								Cong nghe thong tin</p>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<!-- /.row -->
+
+	</div>
+	<!-- /.container -->
+
+	<!-- Footer -->
+	<footer>
+		<div th:replace="student/template/footer::footer"></div>
+	</footer>
+
+
+</body>
+
+</html>

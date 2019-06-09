@@ -1,0 +1,22 @@
+.table {
+	background: white;
+	font-size: 17px;
+}
+
+
+
+.footer {
+	background: #009688;
+	margin: 0px -30px;
+	margin-bottom: -30px;
+	margin-top: auto;
+}
+.app-content p{
+	font-size: 17px;
+	line-height: 1.2;
+	
+}
+
+.chuadat{
+	background: #ffd3d3;
+}

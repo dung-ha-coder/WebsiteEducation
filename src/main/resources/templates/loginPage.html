@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<title>Login</title>
+<link rel="stylesheet"
+	th:href="@{/login/bootstrap/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/login/fonts/ionicons.min.css}">
+<link rel="stylesheet"
+	th:href="@{/login/css/Login-Form-Dark.css}">
+</head>
+
+<body>
+	<div class="login-dark"
+		th:style="'background-image:url(' + @{/login/img/imgLogin.jpg} + ');'">
+		<form class="was-validated" th:action="@{/dang-nhap}" method="POST">
+
+			<h2 class="text-center" style="color: #52779b;">ĐĂNG NHẬP TÀI
+				KHOẢN</h2>
+
+			<div class="illustration">
+				<i class="icon ion-ios-contact-outline"></i>
+			</div>
+			<p class="text-center text-danger mb-2" style="margin: 0px;"
+				th:if="${param.error}">Tên hoặc mật khẩu không chính xác</p>
+
+			<div class="form-group">
+				<input type="text" name="username" placeholder="Tên đăng nhập"
+					class="form-control" />
+			</div>
+			<div class="form-group">
+				<input type="password" name="password" placeholder="Mật khẩu"
+					class="form-control" />
+			</div>
+			<div class="form-check">
+				<input class="form-check-input" type="checkbox" value="true"
+					name="remember-me" id="defaultCheck_remember-me"> <label
+					class="form-check-label" for="defaultCheck_remember-me">
+					Nhớ tên tài khoản </label>
+			</div>
+			<div class="form-group">
+				<button class="btn btn-primary btn-block" style="margin-top: 12px;"
+					type="submit">Đăng nhập</button>
+			</div>
+			<a style="font-size: 18px;" href="#" class="forgot">Quyên mật
+				khẩu</a>
+		</form>
+	</div>
+	<script th:src="@{/login/js/jquery.min.js}"></script>
+	<script th:src="@{/login/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+
+</html>

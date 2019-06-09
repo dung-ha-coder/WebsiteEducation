@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="manage/template/head::head"></head>
+
+<body>
+	<!-- Begin page -->
+	<div id="wrapper">
+		<!-- Top Bar Start -->
+		<div th:replace="manage/template/topbar::topbar"></div>
+		<!-- Top Bar End -->
+		<!-- ========== Left Sidebar Start ========== -->
+		<div th:replace="manage/template/sidebar::sidebar"></div>
+		<!-- sidebar -->
+		<div class="content-page">
+			<!-- Start content -->
+			<div class="content">
+				<div class="container-fluid">
+
+					<div class="row">
+						<h4>DANH SÁCH GIẢNG VIÊN</h4>
+						<table class="table table-hover table-bordered">
+							<thead class="thead-dark">
+								<tr>
+									<th>STT</th>
+									<th>UserName</th>
+									<th>FullName</th>
+									<th>Ngày sinh</th>
+									<th>Khoa</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="user, itrStat : ${listLecturer}">
+									<td th:text="${itrStat.index + 1}">1</td>
+									<td th:text="${user.username} ">user</td>
+									<td th:text="${user.fullname}">full name</td>
+									<td th:text="${#dates.format(user.dayOfBirth, 'dd-MM-yyyy')}">Ngày
+										sinh</td>
+
+									<td th:text="${user.department.nameDepartment}">Khoa</td>
+								</tr>
+
+							</tbody>
+						</table>
+
+					</div>
+					
+						<div class="row d-flex justify-content-center">
+							<nav aria-label="Page navigation example">
+								<ul class="pagination">
+
+									<li th:if="${totalPages > 0}"
+										th:each="pageNumber : ${pageNumbers}"
+										th:classappend="${#httpServletRequest.getParameter('page')} == ${pageNumber} ? 'page-item active' : 'page-item'">
+										<a class="page-link "
+										th:href="@{/manage/xem-danh-sach-giang-vien(page=${pageNumber})}"
+										th:text=${pageNumber}>1</a>
+									</li>
+
+
+								</ul>
+							</nav>
+						</div>
+					
+
+				</div>
+				<!-- container-fluid -->
+			</div>
+			<!-- content -->
+			<footer th:replace="manage/template/footer::footer"></footer>
+		</div>
+	</div>
+
+</body>
+
+</html>

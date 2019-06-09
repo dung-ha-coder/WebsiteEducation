@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="manage/template/head::head"></head>
+
+<body class="app sidebar-mini rtl">
+	<!-- Navbar-->
+	<header th:replace="manage/template/header::header"> </header>
+	<!-- Sidebar menu-->
+	<aside th:replace="manage/template/sidebar::sidebar"></aside>
+
+	<div class="app-content">
+		<div class="">
+			<div class="row">
+				<h4>DANH SÁCH SINH VIÊN</h4>
+				<table class="table table-hover table-bordered">
+					<thead class="thead-dark">
+						<tr>
+							<th>STT</th>
+							<th>UserName</th>
+							<th>FullName</th>
+							<th>Ngày sinh</th>
+							<th>Khoa</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="user, itrStat : ${listStudent}">
+							<td th:text="${itrStat.index + 1}">1</td>
+							<td title="Xem thông tin user"><a th:text="${user.username}"
+								th:href="@{/manage/xem-thong-tin-sinh-vien/}+${user.username}">user</a>
+							</td>
+							<td th:text="${user.fullname}">full name</td>
+							<td th:text="${#dates.format(user.dayOfBirth, 'dd-MM-yyyy')}">Ngày
+								sinh</td>
+
+							<td th:text="${user.department.nameDepartment}">Khoa</td>
+						</tr>
+
+					</tbody>
+				</table>
+
+			</div>
+
+			<div class="row d-flex justify-content-center">
+				<nav aria-label="Page navigation example">
+					<ul class="pagination">
+
+						<li th:if="${totalPages > 0}"
+							th:each="pageNumber : ${pageNumbers}"
+							th:classappend="${#httpServletRequest.getParameter('page')} == ${pageNumber} ? 'page-item active' : 'page-item'">
+							<a class="page-link "
+							th:href="@{/manage/xem-danh-sach-sinh-vien(page=${pageNumber})}"
+							th:text=${pageNumber}>1</a>
+						</li>
+
+
+					</ul>
+				</nav>
+			</div>
+
+
+
+			<footer th:replace="manage/template/footer::footer"></footer>
+		</div>
+	</div>
+
+</body>
+
+</html>

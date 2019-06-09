@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="student/template/head::head"></head>
+
+<body>
+
+	<!-- Navigation -->
+	<nav th:replace="student/template/nav::nav"></nav>
+	<header th:replace="student/template/header::header"></header>
+	<!-- Page Content -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4">
+				<div th:replace="student/template/sidebar::sidebar"></div>
+			</div>
+			<!-- Post Content Column -->
+			<div class="col-lg-8">
+
+				<div class="card my-2">
+					<h5 class="card-header">Bảng điểm sinh viên</h5>
+				</div>
+
+				<div class="my-2">
+					<table class="table table-hover table-bordered">
+						<thead class="thead-light">
+							<tr>
+								<th>STT</th>
+								<th>Môn học</th>
+								<th>Điểm quá trình</th>
+								<th>Điểm Thực hành</th>
+								<th>Điểm giữa kì</th>
+								<th>Điểm cuối kì</th>
+								<th>Điểm trung bình</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="score, itrStat : ${scoresTable}"
+								th:classappend="${score.scoreAverage < 5.0 } ? 'chuadat' : 'dat' ">
+
+								<td th:text="${itrStat.index + 1}">1</td>
+								<td th:text="${score.subject.nameSubject} ">Môn học</td>
+
+
+								<td th:text="${score.scoreProcess}">Điểm quá trình</td>
+								<td th:text="${score.scorePractice}">Điểm Thực hành</td>
+								<td th:text="${score.scoreMidTerm}">Điểm giữa kì</td>
+								<td th:text="${score.scoreEndTerm}">Điểm cuối kì</td>
+								<td th:text="${score.scoreAverage}">Điểm trung bình</td>
+
+
+
+
+							</tr>
+
+						</tbody>
+					</table>
+				</div>
+
+
+			</div>
+		</div>
+
+	</div>
+	<!-- /.row -->
+
+	<!-- /.container -->
+
+	<!-- Footer -->
+	<footer>
+		<div th:replace="student/template/footer::footer"></div>
+	</footer>
+
+
+</body>
+
+</html>

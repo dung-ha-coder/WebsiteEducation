@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="lecturer/template/head::head"></head>
+
+<body>
+
+	<!-- Navigation -->
+	<nav th:replace="lecturer/template/nav::nav"></nav>
+	<header th:replace="lecturer/template/header::header"></header>
+	<!-- Page Content -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4">
+				<div th:replace="lecturer/template/sidebar::sidebar"></div>
+			</div>
+			<!-- Post Content Column -->
+			<div class="col-lg-8 accordion monhoc mt-2">
+
+				<div class="accordion subject" id="accordionExample">
+					<div class="card">
+						<div class="card-header" id="headingOne">
+
+							<button
+								th:text=" 'Các cột điểm của môn học ' +${subject.nameSubject} "
+								class="btn btn-link" type="button" data-toggle="collapse"
+								data-target="#collapseOne" aria-expanded="true"
+								aria-controls="collapseOne"></button>
+
+						</div>
+
+						<div id="collapseOne" class="collapse show"
+							aria-labelledby="headingOne" data-parent="#accordionExample">
+							<div class="card-body">
+								<h4 th:if="${status !=null}" th:text="${status}"
+									style="color: red" class="text-center my-2"></h4>
+
+
+								<table class="table table-hover table-bordered">
+									<thead class="thead-light">
+										<tr>
+											<th>STT</th>
+											<th>Cột điểm</th>
+											<th>Upload file</th>
+
+										</tr>
+									</thead>
+									<tbody>
+
+										<tr>
+
+											<td>1</td>
+											<td>Điểm thực hành</td>
+											<td>
+												<form
+													th:action="@{/lecturer/subject/} + ${subject.idSubject} + @{/upload/diem-thuc-hanh} "
+													method="post" enctype="multipart/form-data"
+													class="d-flex justify-content-between">
+													<input type="file" accept=".xls,.xlsx" name="fileExcel" />
+													<input class="btn btn-outline-success" type="submit"
+														value="Upload" />
+												</form>
+											</td>
+										</tr>
+										<tr>
+
+											<td>2</td>
+											<td>Điểm quá trình</td>
+											<td>
+												<form
+													th:action="@{/lecturer/subject/} + ${subject.idSubject} + @{/upload/diem-qua-trinh} "
+													method="post" enctype="multipart/form-data"
+													class="d-flex justify-content-between">
+													<input type="file" accept=".xls,.xlsx" name="fileExcel" />
+													<input class="btn btn-outline-success" type="submit"
+														value="Upload" />
+												</form>
+											</td>
+
+										</tr>
+
+										<tr>
+
+											<td>3</td>
+											<td>Điểm giữa kì</td>
+											<td>
+												<form
+													th:action="@{/lecturer/subject/} + ${subject.idSubject} + @{/upload/diem-giua-ki} "
+													method="post" enctype="multipart/form-data"
+													class="d-flex justify-content-between">
+													<input type="file" accept=".xls,.xlsx" name="fileExcel" />
+													<input class="btn btn-outline-success" type="submit"
+														value="Upload" />
+												</form>
+											</td>
+										</tr>
+
+										<tr>
+
+											<td>4</td>
+											<td>Điểm cuối kì</td>
+											<td>
+												<form
+													th:action="@{/lecturer/subject/} + ${subject.idSubject} + @{/upload/diem-cuoi-ki} "
+													method="post" enctype="multipart/form-data"
+													class="d-flex justify-content-between">
+													<input type="file" accept=".xls,.xlsx" name="fileExcel" />
+													<input class="btn btn-outline-success" type="submit"
+														value="Upload" />
+												</form>
+											</td>
+										</tr>
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-header" id="headingTwo">
+
+							<button class="btn btn-link collapsed" type="button"
+								data-toggle="collapse" data-target="#collapseTwo"
+								aria-expanded="false" aria-controls="collapseTwo">Bảng điểm môn học</button>
+
+						</div>
+						<div id="collapseTwo" class="collapse"
+							aria-labelledby="headingTwo" data-parent="#accordionExample">
+							<div class="card-body">
+								<table class="table table-hover table-bordered">
+									<thead class="thead-light">
+										<tr>
+											<th>STT</th>
+											<th>UserName</th>
+											<th>FullName</th>
+											<th>ID</th>
+
+											<th>Điểm quá trình</th>
+											<th>Điểm thực hành</th>
+											<th>Điểm giữa kì</th>
+											<th>Điểm cuối kì</th>
+											<th>Điểm trung bình</th>
+
+										</tr>
+									</thead>
+									<tbody>
+
+										<tr th:each="subject_score, itrStat:${subjectScore}"
+											th:classappend="${subject_score.scoreAverage < 5.0} ? 'chuadat' : 'dat' ">
+
+											<td th:text="${itrStat.index + 1}"></td>
+											<td th:text="${subject_score.user.username}"></td>
+											<td th:text="${subject_score.user.fullname}"></td>
+											<td th:text="${subject_score.user.idUser}"></td>
+											<td th:text="${subject_score.scoreProcess}"></td>
+											<td th:text="${subject_score.scorePractice}"></td>
+											<td th:text="${subject_score.scoreMidTerm}"></td>
+											<td th:text="${subject_score.scoreEndTerm}"></td>
+											<td th:text="${subject_score.scoreAverage}"></td>
+
+
+										</tr>
+
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+
+
+
+
+				</div>
+			</div>
+
+		</div>
+		<!-- /.row -->
+
+	</div>
+	<!-- /.container -->
+
+	<!-- Footer -->
+	<footer>
+		<div th:replace="lecturer/template/footer::footer"></div>
+	</footer>
+
+
+</body>
+
+</html>

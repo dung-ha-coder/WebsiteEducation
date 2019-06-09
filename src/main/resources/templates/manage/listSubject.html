@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="manage/template/head::head"></head>
+
+<body class="app sidebar-mini rtl">
+	<!-- Navbar-->
+	<header th:replace="manage/template/header::header"> </header>
+	<!-- Sidebar menu-->
+	<aside th:replace="manage/template/sidebar::sidebar"></aside>
+
+	<div class="app-content">
+		<div class="row">
+			<div class="col col-md-12">
+				<h4>Danh sách các môn học</h4>
+
+				<table class="table table-hover table-bordered">
+					<thead class="thead-dark">
+						<tr>
+							<th>STT</th>
+							<th>Tên môn học</th>
+							<th>Mã môn học</th>
+							<th>Giảng viên</th>
+							<th>Ngày bắt đầu</th>
+							<th>Ngày kết thúc</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="subject, itrStat : ${listSubject}">
+							<td th:text="${itrStat.index + 1}">1</td>
+							<td >
+								<a th:text="${subject.nameSubject}" th:href="@{/manage/xem-thong-tin-mon-hoc/} + ${subject.idSubject}">ten mon hoc</a>
+							</td>
+							<td th:text="${subject.codeSubject}">ma mon hoc</td>
+							<td >
+								<a th:text="${subject.teacher.username}" th:href="@{/manage/xem-thong-tin-giang-vien}"></a>
+							</td>
+							<td th:text="${#dates.format(subject.startTime, 'dd-MM-yyyy')}">Ngày
+								bat dau</td>
+							<td th:text="${#dates.format(subject.endTime, 'dd-MM-yyyy')}">Ngày
+								ket thuc</td>
+
+						</tr>
+
+					</tbody>
+				</table>
+
+			</div>
+
+			<div class="col col-md-12">
+				<footer th:replace="manage/template/footer::footer"></footer>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>

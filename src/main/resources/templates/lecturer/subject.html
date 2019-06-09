@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="lecturer/template/head::head"></head>
+<head>
+<script th:src="@{/lecturer/js/chart.js}"></script>
+
+</head>
+<body>
+
+	<!-- Navigation -->
+	<nav th:replace="lecturer/template/nav::nav"></nav>
+	<header th:replace="lecturer/template/header::header"></header>
+	<!-- Page Content -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4">
+				<div th:replace="lecturer/template/sidebar::sidebar"></div>
+			</div>
+			<!-- Post Content Column -->
+			<div class="col-lg-8 accordion monhoc mt-2">
+
+				<div class="accordion subject" id="accordionExample">
+					<div class="card">
+						<div class="card-header" id="headingOne">
+
+							<button
+								th:text=" 'Các cột điểm của môn học ' +${subject.nameSubject} "
+								class="btn btn-link" type="button" data-toggle="collapse"
+								data-target="#collapseOne" aria-expanded="true"
+								aria-controls="collapseOne"></button>
+
+						</div>
+
+						<div id="collapseOne" class="collapse show"
+							aria-labelledby="headingOne" data-parent="#accordionExample">
+							<div class="card-body">
+								<h4 th:if="${status !=null}" th:text="${status}"
+									style="color: red" class="text-center my-2"></h4>
+
+
+								<table class="table table-hover table-bordered">
+									<thead class="thead-light">
+										<tr>
+											<th>STT</th>
+											<th>Cột điểm</th>
+											<th>Upload file</th>
+
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+
+											<td>1</td>
+											<td>Điểm quá trình</td>
+											<td>
+												<form
+													th:action="@{/lecturer/subject/} + ${subject.idSubject} + @{/upload/diem-qua-trinh} "
+													method="post" enctype="multipart/form-data"
+													class="d-flex justify-content-between">
+													<input type="file" accept=".xls,.xlsx" name="fileExcel" />
+													<input class="btn btn-outline-success" type="submit"
+														value="Upload" />
+												</form>
+											</td>
+
+										</tr>
+
+										<tr>
+
+											<td>2</td>
+											<td>Điểm thực hành</td>
+											<td>
+												<form
+													th:action="@{/lecturer/subject/} + ${subject.idSubject} + @{/upload/diem-thuc-hanh} "
+													method="post" enctype="multipart/form-data"
+													class="d-flex justify-content-between">
+													<input type="file" accept=".xls,.xlsx" name="fileExcel" />
+													<input class="btn btn-outline-success" type="submit"
+														value="Upload" />
+												</form>
+											</td>
+										</tr>
+
+
+										<tr>
+
+											<td>3</td>
+											<td>Điểm giữa kì</td>
+											<td>
+												<form
+													th:action="@{/lecturer/subject/} + ${subject.idSubject} + @{/upload/diem-giua-ki} "
+													method="post" enctype="multipart/form-data"
+													class="d-flex justify-content-between">
+													<input type="file" accept=".xls,.xlsx" name="fileExcel" />
+													<input class="btn btn-outline-success" type="submit"
+														value="Upload" />
+												</form>
+											</td>
+										</tr>
+
+										<tr>
+
+											<td>4</td>
+											<td>Điểm cuối kì</td>
+											<td>
+												<form
+													th:action="@{/lecturer/subject/} + ${subject.idSubject} + @{/upload/diem-cuoi-ki} "
+													method="post" enctype="multipart/form-data"
+													class="d-flex justify-content-between">
+													<input type="file" accept=".xls,.xlsx" name="fileExcel" />
+													<input class="btn btn-outline-success" type="submit"
+														value="Upload" />
+												</form>
+											</td>
+										</tr>
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+
+
+					<!--  chinh sua bang diem -->
+					<div class="card">
+						<div class="card-header" id="heading2">
+
+							<button
+								th:text=" 'Chỉnh sửa cột điểm của môn học ' +${subject.nameSubject} "
+								class="btn btn-link" type="button" data-toggle="collapse"
+								data-target="#collapse2" aria-expanded="true"
+								aria-controls="collapse2"></button>
+
+						</div>
+
+						<div id="collapse2" class="collapse" aria-labelledby="heading2"
+							data-parent="#accordionExample">
+							<div class="card-body">
+								<h4 th:if="${status !=null}" th:text="${status}"
+									style="color: red" class="text-center my-2"></h4>
+
+
+								<table class="table table-hover table-bordered">
+									<thead class="thead-light">
+										<tr>
+											<th>STT</th>
+											<th>Cột điểm</th>
+											<th>Upload file</th>
+
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+
+											<td>1</td>
+											<td>Điểm quá trình</td>
+											<td>
+												<form
+													th:action="@{/lecturer/subject/} + ${subject.idSubject} + @{/upload/update/diem-qua-trinh} "
+													method="post" enctype="multipart/form-data"
+													class="d-flex justify-content-between">
+													<input type="file" accept=".xls,.xlsx" name="fileExcel" />
+													<input class="btn btn-outline-success" type="submit"
+														value="Upload" />
+												</form>
+											</td>
+
+										</tr>
+
+										<tr>
+
+											<td>2</td>
+											<td>Điểm thực hành</td>
+											<td>
+												<form
+													th:action="@{/lecturer/subject/} + ${subject.idSubject} + @{/upload/update/diem-thuc-hanh} "
+													method="post" enctype="multipart/form-data"
+													class="d-flex justify-content-between">
+													<input type="file" accept=".xls,.xlsx" name="fileExcel" />
+													<input class="btn btn-outline-success" type="submit"
+														value="Upload" />
+												</form>
+											</td>
+										</tr>
+
+
+										<tr>
+
+											<td>3</td>
+											<td>Điểm giữa kì</td>
+											<td>
+												<form
+													th:action="@{/lecturer/subject/} + ${subject.idSubject} + @{/upload/update/diem-giua-ki} "
+													method="post" enctype="multipart/form-data"
+													class="d-flex justify-content-between">
+													<input type="file" accept=".xls,.xlsx" name="fileExcel" />
+													<input class="btn btn-outline-success" type="submit"
+														value="Upload" />
+												</form>
+											</td>
+										</tr>
+
+										<tr>
+
+											<td>4</td>
+											<td>Điểm cuối kì</td>
+											<td>
+												<form
+													th:action="@{/lecturer/subject/} + ${subject.idSubject} + @{/upload/update/diem-cuoi-ki} "
+													method="post" enctype="multipart/form-data"
+													class="d-flex justify-content-between">
+													<input type="file" accept=".xls,.xlsx" name="fileExcel" />
+													<input class="btn btn-outline-success" type="submit"
+														value="Upload" />
+												</form>
+											</td>
+										</tr>
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+
+					<!-- bang diem mon hoc -->
+
+
+					<div class="card">
+						<div class="card-header" id="headingTwo">
+
+							<button class="btn btn-link collapsed" type="button"
+								data-toggle="collapse" data-target="#collapseTwo"
+								aria-expanded="false" aria-controls="collapseTwo">Bảng
+								điểm môn học</button>
+
+						</div>
+						<div id="collapseTwo" class="collapse"
+							aria-labelledby="headingTwo" data-parent="#accordionExample">
+							<div class="card-body">
+								<table class="table table-hover table-bordered">
+									<thead class="thead-light">
+										<tr>
+											<th>STT</th>
+											<th>UserName</th>
+											<th>FullName</th>
+											<th>ID</th>
+
+											<th>Điểm quá trình</th>
+											<th>Điểm thực hành</th>
+											<th>Điểm giữa kì</th>
+											<th>Điểm cuối kì</th>
+											<th>Điểm trung bình</th>
+
+										</tr>
+									</thead>
+									<tbody>
+
+										<tr th:each="subject_score, itrStat:${subjectScore}"
+											th:classappend="${subject_score.scoreAverage < 5.0} ? 'chuadat' : 'dat' ">
+
+											<td th:text="${itrStat.index + 1}"></td>
+											<td th:text="${subject_score.user.username}"></td>
+											<td th:text="${subject_score.user.fullname}"></td>
+											<td th:text="${subject_score.user.idUser}"></td>
+											<td th:text="${subject_score.scoreProcess}"
+												th:title="'Trọng số: '+${subject_score.subject.rateProcess} +'%'"></td>
+											<td th:text="${subject_score.scorePractice}"
+												th:title="'Trọng số: '+${subject_score.subject.ratePractice} +'%'"></td>
+											<td th:text="${subject_score.scoreMidTerm}"
+												th:title="'Trọng số: '+${subject_score.subject.rateMidTerm} +'%'"></td>
+											<td th:text="${subject_score.scoreEndTerm}"
+												th:title="'Trọng số: '+${subject_score.subject.reateEndTerm} +'%'"></td>
+											<td th:text="${subject_score.scoreAverage}"
+												th:title="'Điểm trung bình'"></td>
+
+
+										</tr>
+
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+
+
+
+
+
+					<!-- dieu do -->
+
+					<div class="card">
+						<div class="card-header" id="heading3">
+
+							<button class="btn btn-link collapsed" type="button"
+								data-toggle="collapse" data-target="#collapse3"
+								aria-expanded="false" aria-controls="collapse3">Biểu đồ
+								đánh giá chất lượng giảng dạy môn học</button>
+
+						</div>
+						<div id="collapse3" class="collapse" aria-labelledby="heading3"
+							data-parent="#accordionExample">
+							<div class="card-body">
+								<canvas id="ChartDemo" style="background: white;"></canvas>
+								<script type="text/javascript" th:inline="javascript">
+						/*<![CDATA[*/
+						var ctx = document.getElementById("ChartDemo").getContext('2d');
+						var ChartDemo = new Chart(ctx, {
+							type: 'pie',
+							data: {
+								labels: /*[[ ${label} ]]*/,
+								datasets: [
+									{
+										label: "Biểu đồ thể hiện các G đạt được",
+										lineTension: 0,
+										fill: false,
+										data: /*[[ ${point} ]]*/,
+										backgroundColor: [
+											 	'rgba(255, 99, 132, 1)',
+								                'rgba(54, 162, 235, 1)',
+								                'rgba(255, 206, 86, 1)',
+								                'rgba(75, 192, 192, 1)',
+								                'rgba(153, 102, 255, 1)',
+								                'rgba(255, 159, 64, 1)'
+							            ],
+							           
+									},
+								]
+							},
+							options: {
+								responsive: true,
+								scales: {
+							        yAxes: [{
+							            ticks: {
+							                beginAtZero: true
+							            }
+							        }]
+							    }
+							}
+						});
+   					 /*]]>*/
+					</script>
+							</div>
+						</div>
+					</div>
+
+
+
+				</div>
+			</div>
+
+		</div>
+		<!-- /.row -->
+
+	</div>
+	<!-- /.container -->
+
+	<!-- Footer -->
+	<footer>
+		<div th:replace="lecturer/template/footer::footer"></div>
+	</footer>
+
+
+</body>
+
+</html>

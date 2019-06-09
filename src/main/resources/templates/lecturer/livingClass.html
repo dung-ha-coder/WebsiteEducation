@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head th:replace="lecturer/template/head::head"></head>
+
+<body>
+
+	<!-- Navigation -->
+	<nav th:replace="lecturer/template/nav::nav"></nav>
+	<header th:replace="lecturer/template/header::header"></header>
+	<!-- Page Content -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4">
+				<div th:replace="lecturer/template/sidebar::sidebar"></div>
+			</div>
+			<!-- Post Content Column -->
+			<div class="col-lg-8">
+
+				<div class="card my-2 monhoc">
+					<h5 class="card-header"
+						th:text="'Danh sách sinh viên lớp ' + ${livingClass.nameLivingClass}"></h5>
+
+				</div>
+
+				<div class="card my-2">
+					<table class="table table-hover table-bordered">
+						<thead class="thead-light">
+							<tr>
+								<th>STT</th>
+								<th>Username</th>
+								<th>Fullname</th>
+								<th>Ngày sinh</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="user, itrStat : ${livingClass.user}">
+								<td th:text="${itrStat.index + 1}">1</td>
+								<td th:title="'Xem thông tin sinh viên'"><a
+									th:text="${user.username}"
+									th:href="@{/lecturer/thong-tin-sinh-vien/lop-} +${#strings.toLowerCase(user.livingClass.nameLivingClass)}+'/username-'+ ${user.username}"></a>
+								</td>
+								<td th:text="${user.fullname}">ma mon hoc</td>
+								<td th:text="${#dates.format(user.dayOfBirth, 'dd-MM-yyyy')}">Ngay
+									sinh</td>
+							</tr>
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+		</div>
+		<!-- /.row -->
+
+	</div>
+	<!-- /.container -->
+
+	<!-- Footer -->
+	<footer>
+		<div th:replace="lecturer/template/footer::footer"></div>
+	</footer>
+
+
+</body>
+
+</html>

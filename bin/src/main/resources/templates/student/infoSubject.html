@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="student/template/head::head"></head>
+
+<head>
+<script th:src="@{/student/js/chart.js}"></script>
+
+</head>
+
+<body>
+
+	<!-- Navigation -->
+	<nav th:replace="student/template/nav::nav"></nav>
+	<header th:replace="student/template/header::header"></header>
+	<!-- Page Content -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4">
+				<div th:replace="student/template/sidebar::sidebar"></div>
+			</div>
+			<!-- Post Content Column -->
+			<div class="col-lg-8">
+
+				<div class="card my-2">
+					<h5 class="card-header">Các chuẩn môn học</h5>
+				</div>
+
+				<div class="my-2">
+					<table  class="table table-hover table-bordered">
+						<thead class="thead-light">
+							<tr>
+								<th scope="col">STT</th>
+								<th scope="col">Kí hiêu</th>
+								<th scope="col">Tên chuẩn</th>
+								<th scope="col">Kết quả</th>
+								<th>Đánh giá</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="usg, itrStat : ${userSubjectCoursesGoal}"
+								th:classappend="${usg.percent < 50.0} ? 'chuadat' : 'dat' ">
+								<td th:text="${itrStat.index + 1}"></td>
+								<td th:text="${usg.coursesGoal.sign}"></td>
+								<td th:text="${usg.coursesGoal.nameCoursesGoal}"></td>
+								<td th:text="${usg.percent + '%' }"></td>
+								<td th:if="${usg.percent >=50}" th:text="'Đạt'"></td>
+								<td th:if="${usg.percent <50}" th:text="'Chưa Đạt'"></td>
+							</tr>
+
+						</tbody>
+					</table>
+				</div>
+
+				<div class="card my-2">
+					<h5 class="card-header">Bieu do</h5>
+				</div>
+
+
+
+				<div class="my-2">
+					<canvas id="ChartDemo" style="background: white;"></canvas>
+					<script type="text/javascript" th:inline="javascript">
+						/*<![CDATA[*/
+						var ctx = document.getElementById("ChartDemo").getContext('2d');
+						var ChartDemo = new Chart(ctx, {
+							type: 'bar',
+							data: {
+								labels: /*[[ ${label} ]]*/,
+								datasets: [
+									{
+										label: "Chart-1",
+										borderColor: 'rgb(255, 0, 4)',
+										lineTension: 0,
+										fill: false,
+										data: /*[[ ${point} ]]*/,
+									},
+								]
+							},
+							options: {
+								responsive: true,
+							}
+						});
+   					 /*]]>*/
+					</script>
+				</div>
+
+
+
+			</div>
+		</div>
+
+	</div>
+	<!-- /.row -->
+
+	<!-- /.container -->
+
+	<!-- Footer -->
+	<footer>
+		<div th:replace="student/template/footer::footer"></div>
+	</footer>
+
+
+</body>
+
+</html>

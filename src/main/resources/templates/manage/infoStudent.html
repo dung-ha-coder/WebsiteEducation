@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="manage/template/head::head"></head>
+
+<body class="app sidebar-mini rtl">
+	<!-- Navbar-->
+	<header th:replace="manage/template/header::header"> </header>
+	<!-- Sidebar menu-->
+	<aside th:replace="manage/template/sidebar::sidebar"></aside>
+
+	<div class="app-content">
+		<div class="row">
+			<div class="col col-md-12">
+				<h4>THÔNG TIN SINH VIÊN</h4>
+				<div class="card mb-3">
+					<div class="row no-gutters">
+						<div class="col-md-2">
+							<img
+								src="https://2sao.vietnamnetjsc.vn/images/2018/11/14/22/37/hot-girl-banh-trang-tron-3.jpg"
+								class="card-img" alt="...">
+						</div>
+						<div class="col-md-10">
+							<div class="card-body">
+								<p class="card-text" th:text="'Username: ' + ${user.username}">Card
+									title</p>
+								<p class="card-text" th:text="'Fullname: ' + ${user.fullname}">onger.</p>
+								<p class="card-text"
+									th:text="'Ngày sinh: ' +  ${#dates.format(user.dayOfBirth, 'dd-MM-yyyy')}">Last
+									updated 3 mins ago</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+			<div class="col col-md-12">
+				<h4>THÔNG TIN MÔN HỌC</h4>
+				<table class="table table-hover table-bordered">
+					<thead class="thead-dark">
+						<tr>
+							<th>STT</th>
+							<th>Tên môn học</th>
+							<th>Thời gian bắt đầu</th>
+							<th>Thời gian kết thúc</th>
+							<th>Số tín chỉ</th>
+							<th>Giảng viên</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="subject, itrStat : ${user.subjects}">
+							<td th:text="${itrStat.index + 1}">1</td>
+							<td th:text="${subject.nameSubject}"></td>
+							<td th:text="${#dates.format(subject.startTime, 'dd-MM-yyyy')}">tg
+								bat dau</td>
+							<td th:text="${#dates.format(subject.endTime, 'dd-MM-yyyy')}">tg
+								bat dau</td>
+							<td th:text="${subject.numberOfCredits}"></td>
+							<td><a th:text="${subject.teacher.username}"
+								th:href="@{/manage/xem-thong-tin-giang-vien/} + ${subject.teacher.username}">Giang
+									vien</a></td>
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+			<div class="col col-md-12">
+				<h4>THÔNG TIN BẢNG ĐIỂM</h4>
+				<table class="table table-hover table-bordered">
+					<thead class="thead-dark">
+						<tr>
+							<th>STT</th>
+							<th>Tên môn học</th>
+							<th>Điểm quá trình</th>
+							<th>Điểm thực hành</th>
+							<th>Điểm giữa kì</th>
+							<th>Điểm cuối kì</th>
+							<th>Điểm trung bình</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="score, itrStat : ${user.scoresTableList}"
+						th:classappend="${score.scoreAverage < 5.0}? 'chuadat' : 'dat' ">
+							<td th:text="${itrStat.index + 1}">1</td>
+							<td th:text="${score.subject.nameSubject}"></td>
+							<td th:text="${score.scoreProcess}">diem qua trinh</td>
+							<td th:text="${score.scorePractice}">diem thuc hanh</td>
+							<td th:text="${score.scoreMidTerm}">diem giua ki</td>
+							<td th:text="${score.scoreEndTerm}">diem cuoi ki</td>
+							<td th:text="${score.scoreAverage}">diem trung binh</td>
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+			
+			
+			<div class="col col-md-12">
+				<h4>THÔNG TIN CÁC CHUẨN ĐẦU RA CỦA SINH VIÊN</h4>
+				<table class="table table-hover table-bordered">
+					<thead class="thead-dark">
+						<tr>
+							<th>STT</th>
+							<th>Tên chuẩn đầu ra</th>
+							<th>Tỉ lệ đạt được</th>
+							
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="userLO, itrStat : ${user.userLearningoutcomeList}"
+						th:classappend="${userLO.percent < 50}? 'chuadat' : 'dat' ">
+							<td th:text="${itrStat.index + 1}">1</td>
+							<td th:text="${userLO.learningOutcome.nameLearningOutcome}">Tên chuẩn đầu ra</td>
+							<td th:text="${userLO.percent}">Tỉ lệ đạt được</td>
+							
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+
+
+			<div class="col col-md-12">
+				<footer th:replace="manage/template/footer::footer"></footer>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>

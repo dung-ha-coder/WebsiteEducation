@@ -1,0 +1,118 @@
+/*!
+ * Start Bootstrap - Blog Post (https://startbootstrap.com/template-overviews/blog-post)
+ * Copyright 2013-2019 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-blog-post/blob/master/LICENSE)
+ */
+ body {
+	padding-top: 56px;
+	background: #e6e6e6;
+}
+
+.monhoc p {
+	margin-bottom: 0px;
+}
+
+
+
+a:hover {
+	text-decoration: none;
+}
+
+nav a {
+	color: white;
+}
+
+.sidebar_menu li {
+	
+	padding:10px 20px;
+	font-weight: 500;
+	cursor: pointer;
+}
+
+.sidebar_menu li a {
+	font-size: 18px;
+}
+
+.sidebar_menu li:hover {
+	background-color: #c5c2c2;
+}
+
+
+
+.sidebar .card-header{
+	padding: 15.5px 20px;
+}
+
+
+.card-header{
+	padding: 15.5px 20px;
+}
+
+.monhoc .card-body{
+
+	padding: 0px;
+}
+
+.monhoc button{
+	font-size: 20px;
+	padding: 0px;
+	font-weight: 500;
+}
+.monhoc button:hover, button:focus, button:active, button:visited{
+	text-decoration: none;
+	box-shadow: none;
+	outline: none;
+}
+
+.monhoc table{
+	margin-bottom: 0px;
+}
+
+.monhoc .btn-link{
+	color: black;
+}
+.btn-link {
+    font-weight: 500;
+    color:black; 
+ 	text-decoration: none; 
+}
+.card_body_monhoc:hover {
+	background: rgba(0,0,0,.03);
+}
+header .img-fluid {
+    max-width: 100%;
+    height: 180px;
+}
+table td{
+	vertical-align: middle;
+}
+
+table{
+	background: white;
+}
+
+
+.chuadat{
+	background: #ffd3d3;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

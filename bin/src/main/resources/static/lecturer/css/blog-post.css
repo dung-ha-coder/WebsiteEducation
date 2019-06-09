@@ -1,0 +1,112 @@
+/*!
+ * Start Bootstrap - Blog Post (https://startbootstrap.com/template-overviews/blog-post)
+ * Copyright 2013-2019 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-blog-post/blob/master/LICENSE)
+ */
+body {
+	padding-top: 56px;
+	background: #e6e6e6;
+}
+
+.monhoc p {
+	margin-bottom: 0px;
+}
+
+
+
+a:hover {
+	text-decoration: none;
+}
+
+nav a {
+	color: white;
+}
+
+.sidebar_menu li {
+	
+	padding:10px 20px;
+	font-weight: 500;
+	cursor: pointer;
+}
+
+.sidebar_menu li a {
+	font-size: 18px;
+}
+
+.sidebar_menu li:hover {
+	background-color: #c5c2c2;
+}
+
+.card-header{
+	padding: 15.5px 20px;
+}
+
+
+
+
+.monhoc .card-body{
+
+	padding: 0px;
+}
+
+.monhoc button{
+	font-size: 20px;
+	padding: 0px;
+	font-weight: 500;
+}
+
+
+.monhoc table{
+	margin-bottom: 0px;
+}
+.card-body.card_body_monhoc:hover {
+    background: rgba(0,0,0,.03);;
+}
+
+.subject .card-header{
+	padding: 12px 20px;
+}
+
+.subject .btn, .btn-link{
+	color: black;
+	text-decoration: none;
+}
+
+.subject .btn:active, .btn-link:active, .btn:hover, .btn-link:hover, .btn:focus, .btn-link:focus{
+	text-decoration: none;
+}
+
+header .img-fluid {
+    max-width: 100%;
+    height: 180px;
+}
+
+.card_body_monhoc:hover {
+	background: rgba(0,0,0,.03);
+}
+
+table td{
+	vertical-align: middle;
+}
+
+.chuadat{
+	background: #ffd3d3;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head th:replace="lecturer/template/head::head"></head>
+
+<body>
+
+	<!-- Navigation -->
+	<nav th:replace="lecturer/template/nav::nav"></nav>
+	<header th:replace="lecturer/template/header::header"></header>
+	<!-- Page Content -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4">
+				<div th:replace="lecturer/template/sidebar::sidebar"></div>
+			</div>
+			<!-- Post Content Column -->
+			<div class="col-lg-8">
+
+				<div class="card mt-2 monhoc">
+					<h5 class="card-header"
+						th:text="'Thông tin sinh viên ' +${users.fullname}"></h5>
+
+				</div>
+				<div class="card">
+					<div class="row">
+						<div class="col col-md-4">
+							<img
+								src="https://2sao.vietnamnetjsc.vn/images/2018/11/14/22/37/hot-girl-banh-trang-tron-3.jpg"
+								class="img-fluid" />
+
+						</div>
+
+						<div class="col col-md-8 card-body thong_tin_user">
+							<p th:text=" 'Họ và tên: ' +${users.fullname} ">Fullname: Ha
+								Tien Dung</p>
+							<p
+								th:text=" 'Ngày sinh: ' + ${#dates.format(users.dayOfBirth, 'dd-MM-yyyy')}">
+								Ngay sinh: 222222</p>
+							<p
+								th:text=" 'Khoa quản lý: ' + ${users.department.nameDepartment} ">Khoa:
+								Cong nghe thong tin</p>
+
+						</div>
+					</div>
+				</div>
+
+
+				<div class="card mt-2 monhoc">
+					<h5 class="card-header">Bảng điểm sinh viên</h5>
+
+				</div>
+				<div class="card">
+
+
+					<table class="table table-hover table-bordered">
+						<thead class="thead-light">
+							<tr>
+								<th>STT</th>
+								<th>Tên môn học</th>
+								<th>Số tín chỉ</th>
+								<th>Điểm quá trình</th>
+								<th>Điểm thực hành</th>
+								<th>Điểm giữa kì</th>
+								<th>Điểm cuối kì</th>
+								<th>Điểm trung bình</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="score, itrStat : ${users.scoresTableList}"
+								th:classappend="${score.scoreAverage < 5.0}? 'chuadat' : 'dat' ">
+								<td th:text="${itrStat.index + 1}">1</td>
+								<td th:text="${score.subject.nameSubject}"></td>
+								<td th:text="${score.subject.numberOfCredits}">so
+									tin chi</td>
+								<td th:text="${score.scoreProcess}">diem qua trinh</td>
+								<td th:text="${score.scorePractice}">diem thuc hanh</td>
+								<td th:text="${score.scoreMidTerm}">diem giua ki</td>
+								<td th:text="${score.scoreEndTerm}">diem cuoi ki</td>
+								<td th:text="${score.scoreAverage}">diem trung binh</td>
+							</tr>
+							<tr>
+								<td colspan="2">Tổng số tín chỉ tích lũy</td>
+								<td th:text="${sumNumberOfCredit}"></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							
+							<tr>
+								<td colspan="2">Điểm trung bình chung</td>
+								<td ></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td th:text="${#numbers.formatDecimal(avg,1,2)}"></td>
+							</tr>
+							
+						</tbody>
+					</table>
+
+				</div>
+
+
+
+
+				<div class="card mt-2 monhoc">
+					<h5 class="card-header">Các chuẩn đầu ra chương trình đào tạo</h5>
+
+				</div>
+				<div class="card">
+					<table class="table table-hover table-bordered bg-white">
+						<thead class="thead-light">
+							<tr>
+								<th>STT</th>
+								<th>Kí hiệu</th>
+								<th>Tên chuẩn</th>
+								<th>Tỉ lệ hoàn thành</th>
+								<th>Đánh giá</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="lo ,itrStat : ${users.userLearningoutcomeList}"
+								th:classappend="${lo.percent < 50}? 'chuadat' : 'dat' ">
+
+								<td th:text="${itrStat.index + 1}">1</td>
+								<td th:text="${lo.learningOutcome.sign}">Kí hiệu</td>
+								<td th:text="${lo.learningOutcome.nameLearningOutcome}">Tên
+									chuẩn</td>
+								<td th:if="${lo.percent != null}" th:text="${lo.percent + '%'}">Tỉ
+									lệ</td>
+
+								<td th:if="${lo.percent == null}" th:text="'0%'">Tỉ lệ</td>
+
+								<td th:if="${lo.percent >= 50}" th:text="'Đạt'">Đánh giá</td>
+								<td th:if="${lo.percent < 50}" th:text="'Chưa Đạt'">Đánh
+									giá</td>
+							</tr>
+
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+
+		</div>
+		<!-- /.row -->
+
+	</div>
+	<!-- /.container -->
+
+	<!-- Footer -->
+	<footer>
+		<div th:replace="lecturer/template/footer::footer"></div>
+	</footer>
+
+
+</body>
+
+</html>
