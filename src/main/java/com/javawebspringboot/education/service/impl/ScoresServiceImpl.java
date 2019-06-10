@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.DecimalFormat;
 import java.time.Instant;
 import java.util.List;
 
@@ -190,7 +191,9 @@ public class ScoresServiceImpl implements ScoresService {
 				sumXL++;
 			}
 		}
-		float kq = (sumXL / sumHS)*100;
-		return kq;
+		DecimalFormat df = new DecimalFormat("#.##");
+
+		float kq = (sumXL / sumHS) * 100;
+		return Float.parseFloat(df.format(kq));
 	}
 }

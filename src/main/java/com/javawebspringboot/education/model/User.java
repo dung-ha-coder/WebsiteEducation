@@ -17,6 +17,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -59,12 +60,17 @@ public class User implements Serializable {
 	@JoinColumn(name = "id_department", referencedColumnName = "id_department")
 	private Department department;
 
+	// truong khoa
+	@OneToOne(mappedBy = "userHeadDepartment")
+	private Department departments;
+
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
 	private List<UserSubjectCoursesGoal> userSubjectCoursesgoalList;
 
 	@OneToMany(mappedBy = "userAdviser", fetch = FetchType.LAZY)
 	private List<LivingClass> livingClasseList;
 
+	// co van hoc tap
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_living_class", referencedColumnName = "id_living_class")
 	private LivingClass livingClass;
@@ -75,7 +81,7 @@ public class User implements Serializable {
 
 	public User(String username, String password, String fullname, Date dayOfBirth, List<Role> roleList,
 			List<Subject> subjects, List<ScoresTable> scoresTableList,
-			List<UserLearningOutcome> userLearningoutcomeList, Department department,
+			List<UserLearningOutcome> userLearningoutcomeList, Department department, Department departments,
 			List<UserSubjectCoursesGoal> userSubjectCoursesgoalList, List<LivingClass> livingClasseList,
 			LivingClass livingClass) {
 		super();
@@ -88,9 +94,18 @@ public class User implements Serializable {
 		this.scoresTableList = scoresTableList;
 		this.userLearningoutcomeList = userLearningoutcomeList;
 		this.department = department;
+		this.departments = departments;
 		this.userSubjectCoursesgoalList = userSubjectCoursesgoalList;
 		this.livingClasseList = livingClasseList;
 		this.livingClass = livingClass;
+	}
+
+	public Department getDepartments() {
+		return departments;
+	}
+
+	public void setDepartments(Department departments) {
+		this.departments = departments;
 	}
 
 	public List<LivingClass> getLivingClasseList() {

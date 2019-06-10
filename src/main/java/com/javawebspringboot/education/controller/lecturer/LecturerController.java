@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.javawebspringboot.education.exception.ReadFileException;
+import com.javawebspringboot.education.model.Department;
 import com.javawebspringboot.education.model.ScoresTable;
 import com.javawebspringboot.education.model.Subject;
 import com.javawebspringboot.education.model.User;
+import com.javawebspringboot.education.service.DepartmentService;
 import com.javawebspringboot.education.service.LivingClassService;
 import com.javawebspringboot.education.service.ScoresService;
 import com.javawebspringboot.education.service.SubjectService;
@@ -27,6 +29,9 @@ import com.javawebspringboot.education.utiles.TableScore;
 public class LecturerController {
 	@Autowired
 	private LivingClassService livingClassService;
+
+	@Autowired
+	private DepartmentService departmentService;
 
 	@Autowired
 	private UserService userService;
@@ -60,12 +65,6 @@ public class LecturerController {
 		scoreService.getDataChart(label, point, scoresTables);
 		model.addAttribute("label", label);
 		model.addAttribute("point", point);
-		for (Float float1 : point) {
-			System.out.println(float1);
-		}
-		for (String string : label) {
-			System.out.println(string);
-		}
 
 		// doc file excel co the bi loi
 		// bi loi thi vao controller nay va lay loi tra ve view
@@ -76,9 +75,6 @@ public class LecturerController {
 
 		return "lecturer/subject";
 	}
-
-	
-
 
 	@RequestMapping(value = "/lecturer/subject/{idSubject}/upload/{cotDiem}")
 	public String readFileExcel(Model model, @PathVariable(name = "idSubject") Integer idSubject,
@@ -143,6 +139,57 @@ public class LecturerController {
 		model.addAttribute("sumNumberOfCredit", scoreService.sumNumberOfCredit(sinhVien));
 		model.addAttribute("avg", scoreService.scoreAvg(sinhVien));
 		return "lecturer/infoStudentInLivingClass";
+	}
+
+	@RequestMapping("/lecturer/xem-danh-sach-user-trong-khoa/{idDepartment}")
+	public String showListUserDepartment(Model model, @PathVariable(name = "idDepartment") Integer idDepartment) {
+		// menu
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		User user = userService.findByUsername(userDetails.getUsername());
+		model.addAttribute("user", user);
+
+		// tim ds user
+		Department department = departmentService.findByIdDepartment(idDepartment);
+		model.addAttribute("listLecturer", userService.findByDepartmentAndRoleListLecturer(department));
+		model.addAttribute("listStudent", userService.findByDepartmentAndRoleListStudent(department));
+
+		return "lecturer/listUserDepartment";
+	}
+
+	@RequestMapping("/lecturer/subject/{idSubject}/upload/update/{cotDiem}")
+	public String updateScore(Model model, @PathVariable(name = "idSubject") Integer idSubject,
+			@PathVariable(name = "cotDiem") String cotDiem, @RequestParam(name = "fileExcel") MultipartFile fileExcel) {
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		User user = userService.findByUsername(userDetails.getUsername());
+		model.addAttribute("user", user);
+		List<TableScore> lisTableScores = null;
+		try {
+			lisTableScores = new ArrayList<>();
+			lisTableScores = subjectService.fileHandler(fileExcel);
+		} catch (ReadFileException ex) {
+			return "redirect:/lecturer/subject/{idSubject}";
+		}
+
+		// file excel khong bi loi
+		// xu li file
+		if (lisTableScores != null) {
+			Subject subject = subjectService.findByIdSubject(idSubject);
+			// subjectService.readData(lisTableScores, subject, cotDiem);
+			boolean check = scoreService.checkFullScore(lisTableScores.get(0).getCodeStudent(), subject);
+			System.out.println("check " + check);
+			if (check == true) {
+				// day du cac cot diem
+				// tinh diem trung binh cho sinh vien
+				// scoreService.updateScoreAverage(lisTableScores, subject);
+			} else {
+				// chua du cac cot diem
+				// bo qua
+
+			}
+			// scoreService.saveFileExcelToDisk(fileExcel);
+
+		}
+		return "redirect:/lecturer/subject/{idSubject}";
 	}
 
 }

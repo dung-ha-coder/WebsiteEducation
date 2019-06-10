@@ -23,12 +23,20 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<ul class="list-unstyled mb-0 sidebar_menu">
-						<li th:each="class :${user.livingClasseList}">
-							<a th:text="'Cố vấn học tập lớp ' + ${class.nameLivingClass}" th:href="@{/lecturer/co-van-hoc-tap-lop-}+ ${#strings.toLowerCase(class.nameLivingClass)}">Thông
+
+						<li th:if="${user.departments != null}"><a
+							th:href="@{/lecturer/xem-danh-sach-user-trong-khoa/} + ${user.departments.idDepartment}"
+							th:text="'Trưởng khoa ' +${user.departments.nameDepartment}">Web
+								Design</a></li>
+
+						<li th:each="class :${user.livingClasseList}"><a
+							th:text="'Cố vấn học tập lớp ' + ${class.nameLivingClass}"
+							th:href="@{/lecturer/co-van-hoc-tap-lop-}+ ${#strings.toLowerCase(class.nameLivingClass)}">Thông
 								tin lớp cố vấn học tập</a></li>
+
 						<li><a href="#">Xem bảng điểm</a></li>
 						<li><a href="#">Xem chuần đầu ra</a></li>
-						<li><a href="#">Web Design</a></li>
+
 						<li><a href="#">Web Design</a></li>
 					</ul>
 				</div>

@@ -8,7 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -25,6 +27,10 @@ public class Department implements Serializable {
 	@Column(name = "name_department")
 	private String nameDepartment;
 
+	@OneToOne
+	@JoinColumn(name = "id_user_head_department")
+	private User userHeadDepartment;
+
 	@OneToMany(mappedBy = "department")
 	private List<User> userList;
 
@@ -32,10 +38,19 @@ public class Department implements Serializable {
 		super();
 	}
 
-	public Department(String nameDepartment, List<User> userList) {
+	public Department(String nameDepartment, User userHeadDepartment, List<User> userList) {
 		super();
 		this.nameDepartment = nameDepartment;
+		this.userHeadDepartment = userHeadDepartment;
 		this.userList = userList;
+	}
+
+	public User getUserHeadDepartment() {
+		return userHeadDepartment;
+	}
+
+	public void setUserHeadDepartment(User userHeadDepartment) {
+		this.userHeadDepartment = userHeadDepartment;
 	}
 
 	public Integer getIdDepartment() {

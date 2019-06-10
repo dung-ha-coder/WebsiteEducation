@@ -18,12 +18,12 @@
 			<!-- Post Content Column -->
 			<div class="col-lg-8">
 
-				<div class="card my-2 monhoc">
+				<div class="card mt-2 monhoc">
 					<h5 class="card-header">Danh sách các môn học</h5>
 
 				</div>
 
-				<div class="card my-2" th:each="subject : ${user.subjects}">
+				<div class="card mt-1" th:each="subject : ${user.subjects}">
 					<div class="card-body card_body_monhoc" style="padding: 12px 20px;">
 						<h4 style="font-size: 18px;">
 							<a th:href="@{/lecturer/subject/} + ${subject.idSubject}"
@@ -32,7 +32,16 @@
 						</h4>
 						<p style="margin: 0px">Giáo viên giảng dạy: adsfads</p>
 						<p style="margin: 0px">Giáo viên thực hành: adsfads</p>
-						<p style="margin: 0px">Số tín chỉ: 4</p>
+
+						<p style="margin: 0px"
+							th:text="'Thời gian bắt đầu: '+${#dates.format(subject.startTime, 'dd-MM-yyyy')}">tg
+							bat dau</p>
+						<p style="margin: 0px"
+							th:text="'Thời gian bắt đầu: '+${#dates.format(subject.endTime, 'dd-MM-yyyy')}">tg
+							ket thuc</p>
+						<p style="margin: 0px"
+							th:text="'Số tín chỉ: ' + ${subject.numberOfCredits}">Số tín
+							chỉ: 4</p>
 					</div>
 				</div>
 			</div>
