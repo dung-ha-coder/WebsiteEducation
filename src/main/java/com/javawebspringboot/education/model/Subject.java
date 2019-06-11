@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -71,9 +72,17 @@ public class Subject implements Serializable {
 	@OneToMany(mappedBy = "subject", fetch = FetchType.LAZY)
 	private List<Answer> answerList;
 
-	@OneToOne
-	@JoinColumn(name = "id_teacher")
+	@JoinColumn(name = "id_teacher", referencedColumnName = "id_user")
+	@ManyToOne(fetch = FetchType.LAZY)
 	private User teacher;
+
+	@JoinColumn(name = "id_practice_teacher", referencedColumnName = "id_user")
+	@ManyToOne(fetch = FetchType.LAZY)
+	private User practiceTeacher;
+
+	@OneToOne
+	@JoinColumn(name = "id_department")
+	private Department department;
 
 	public Subject() {
 		super();
@@ -82,7 +91,8 @@ public class Subject implements Serializable {
 	public Subject(String nameSubject, String codeSubject, Date startTime, Date endTime, Float rateProcess,
 			Float ratePractice, Float rateMidTerm, Float reateEndTerm, Integer numberOfCredits, List<User> userList,
 			List<CoursesGoal> coursesGoalList, List<ScoresTable> scoresList,
-			List<UserSubjectCoursesGoal> userSubjectCoursesgoalList, List<Answer> answerList, User teacher) {
+			List<UserSubjectCoursesGoal> userSubjectCoursesgoalList, List<Answer> answerList, User teacher,
+			User practiceTeacher, Department department) {
 		super();
 		this.nameSubject = nameSubject;
 		this.codeSubject = codeSubject;
@@ -99,6 +109,41 @@ public class Subject implements Serializable {
 		this.userSubjectCoursesgoalList = userSubjectCoursesgoalList;
 		this.answerList = answerList;
 		this.teacher = teacher;
+		this.practiceTeacher = practiceTeacher;
+		this.department = department;
+	}
+
+	public Subject(String nameSubject, String codeSubject, Date startTime, Date endTime, Float rateProcess,
+			Float ratePractice, Float rateMidTerm, Float reateEndTerm, User teacher, User practiceTeacher,
+			Department department) {
+		super();
+		this.nameSubject = nameSubject;
+		this.codeSubject = codeSubject;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.rateProcess = rateProcess;
+		this.ratePractice = ratePractice;
+		this.rateMidTerm = rateMidTerm;
+		this.reateEndTerm = reateEndTerm;
+		this.teacher = teacher;
+		this.practiceTeacher = practiceTeacher;
+		this.department = department;
+	}
+
+	public User getPracticeTeacher() {
+		return practiceTeacher;
+	}
+
+	public void setPracticeTeacher(User practiceTeacher) {
+		this.practiceTeacher = practiceTeacher;
+	}
+
+	public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department department) {
+		this.department = department;
 	}
 
 	public User getTeacher() {

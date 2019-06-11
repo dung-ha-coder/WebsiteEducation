@@ -20,15 +20,19 @@
 							<th>STT</th>
 							<th>Kí hiệu</th>
 							<th>Tên chuẩn</th>
-
+							<th>Sửa</th>
+							<th>Xóa</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="g, itrStat : ${coursesGoal}">
+						<tr th:each="g, itrStat : ${coursesGoalList}">
 							<td th:text="${itrStat.index + 1}">1</td>
 							<td th:text="${g.sign}"></td>
 							<td th:text="${g.nameCoursesGoal}">ma mon hoc</td>
-
+							<td><a class="btn btn-success"
+								th:href="@{/manage/chinh-sua-g/subject/}  + ${subject.idSubject} +'/coursesgoal/' +${g.idCoursesGoal} ">Sửa</a></td>
+							<td><a class="btn btn-danger"
+								th:href="@{/manage/xoa-g/subject/} + ${subject.idSubject} +'/coursesgoal/' +${g.idCoursesGoal} ">Xóa</a></td>
 						</tr>
 
 					</tbody>
@@ -38,15 +42,19 @@
 
 			<div class="col col-md-12">
 				<h4>THÊM MỤC TIÊU MÔN HỌC (G) MỚI</h4>
-				<form th:action="@{/manage/them-g-moi/subject/} + ${subject.idSubject}">
+				<form
+					th:action="@{/manage/them-g-moi/subject/} + ${subject.idSubject}"
+					method="post">
 					<div class="form-group">
 						<label for="exampleFormControlTextarea1">Nhập mục tiêu môn
 							học</label>
-						<textarea class="form-control" id="exampleFormControlTextarea1"
-							rows="5"></textarea>
+						<textarea name="txtG" class="form-control"
+							id="exampleFormControlTextarea1" style="font-size: 17px;"
+							rows="4"></textarea>
 					</div>
 
-					<button type="submit" class="btn btn-primary mb-2">Thêm mới</button>
+					<button type="submit" style="font-size: 18px" class="btn btn-primary mb-2">Thêm
+						mới</button>
 
 				</form>
 

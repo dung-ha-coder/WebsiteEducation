@@ -56,6 +56,7 @@ public class User implements Serializable {
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private List<UserLearningOutcome> userLearningoutcomeList;
 
+	// user thuoc khoa nao
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_department", referencedColumnName = "id_department")
 	private Department department;
@@ -67,6 +68,7 @@ public class User implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
 	private List<UserSubjectCoursesGoal> userSubjectCoursesgoalList;
 
+	// user thuoc lop sinh hoat nao
 	@OneToMany(mappedBy = "userAdviser", fetch = FetchType.LAZY)
 	private List<LivingClass> livingClasseList;
 
@@ -74,6 +76,12 @@ public class User implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_living_class", referencedColumnName = "id_living_class")
 	private LivingClass livingClass;
+
+	@OneToMany(mappedBy = "teacher", fetch = FetchType.LAZY)
+	private List<Subject> listSubjectTeacher;
+
+	@OneToMany(mappedBy = "practiceTeacher", fetch = FetchType.LAZY)
+	private List<Subject> listSubjectPracticeTeacher;
 
 	public User() {
 		super();
@@ -83,7 +91,7 @@ public class User implements Serializable {
 			List<Subject> subjects, List<ScoresTable> scoresTableList,
 			List<UserLearningOutcome> userLearningoutcomeList, Department department, Department departments,
 			List<UserSubjectCoursesGoal> userSubjectCoursesgoalList, List<LivingClass> livingClasseList,
-			LivingClass livingClass) {
+			LivingClass livingClass, List<Subject> listSubjectTeacher, List<Subject> listSubjectPracticeTeacher) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -98,6 +106,24 @@ public class User implements Serializable {
 		this.userSubjectCoursesgoalList = userSubjectCoursesgoalList;
 		this.livingClasseList = livingClasseList;
 		this.livingClass = livingClass;
+		this.listSubjectTeacher = listSubjectTeacher;
+		this.listSubjectPracticeTeacher = listSubjectPracticeTeacher;
+	}
+
+	public List<Subject> getListSubjectTeacher() {
+		return listSubjectTeacher;
+	}
+
+	public void setListSubjectTeacher(List<Subject> listSubjectTeacher) {
+		this.listSubjectTeacher = listSubjectTeacher;
+	}
+
+	public List<Subject> getListSubjectPracticeTeacher() {
+		return listSubjectPracticeTeacher;
+	}
+
+	public void setListSubjectPracticeTeacher(List<Subject> listSubjectPracticeTeacher) {
+		this.listSubjectPracticeTeacher = listSubjectPracticeTeacher;
 	}
 
 	public Department getDepartments() {

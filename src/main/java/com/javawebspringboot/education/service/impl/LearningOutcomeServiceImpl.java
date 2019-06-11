@@ -6,20 +6,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.javawebspringboot.education.model.Department;
 import com.javawebspringboot.education.model.LearningOutcome;
 import com.javawebspringboot.education.repository.LearningOutcomeRepository;
 import com.javawebspringboot.education.service.LearningOutcomeService;
 
 @Service
 @Transactional
-public class LearningOutcomeServiceImpl implements LearningOutcomeService{
+public class LearningOutcomeServiceImpl implements LearningOutcomeService {
 
 	@Autowired
 	private LearningOutcomeRepository learningOutcomeRepository;
-	
+
 	@Override
 	public List<LearningOutcome> findAll() {
 		return learningOutcomeRepository.findAll();
+	}
+
+	@Override
+	public List<LearningOutcome> findByDepartment(Department department) {
+
+		return learningOutcomeRepository.findByDepartment(department);
 	}
 
 }

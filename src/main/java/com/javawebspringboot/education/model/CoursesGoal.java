@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -43,7 +44,10 @@ public class CoursesGoal implements Serializable {
 	@ManyToMany(mappedBy = "coursesGoalList", fetch = FetchType.LAZY)
 	private List<Answer> answerList;
 
-	@ManyToMany(mappedBy = "coursesGoalsList", fetch = FetchType.LAZY)
+	@ManyToMany
+	@JoinTable(name = "coursesgoal_learningoutcome", joinColumns = @JoinColumn(name = "id_courses_goal", referencedColumnName = "id_course_goal"),
+			inverseJoinColumns = @JoinColumn(name = "id_learning_outcome", referencedColumnName = "id_learningoutcome"))
+
 	private List<LearningOutcome> learningOutcomeList;
 
 	public CoursesGoal() {

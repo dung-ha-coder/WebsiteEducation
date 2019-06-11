@@ -17,19 +17,21 @@
 			<!-- Post Content Column -->
 			<div class="col-lg-8">
 
-				<div class="card my-2">
+				<div class="card mt-2">
 					<h5 class="card-header">Các chuẩn đầu ra chương trình đào tạo</h5>
 				</div>
 
-				<div class="card my-2">
+				<div class="card mb-2">
 					<table class="table table-hover table-bordered bg-white">
 						<thead class="thead-light">
 							<tr>
 								<th>STT</th>
 								<th>Kí hiệu</th>
 								<th>Tên chuẩn</th>
+								<th>ID</th>
 								<th>Tỉ lệ hoàn thành</th>
 								<th>Đánh giá</th>
+								<th>Khoa</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -39,10 +41,14 @@
 								<td th:text="${itrStat.index + 1}">1</td>
 								<td th:text="${lo.learningOutcome.sign}">Kí hiệu</td>
 								<td th:text="${lo.learningOutcome.nameLearningOutcome}">Tên chuẩn</td>
+								<td th:text="${lo.learningOutcome.idLearningOutcome}"></td>
 								<td th:if="${lo.percent != null}" th:text="${lo.percent + '%'}">Tỉ
+									lệ</td>
+								<td th:if="${lo.percent == null}" th:text="'-'">Tỉ
 									lệ</td>
 								<td th:if="${lo.percent >= 50}" th:text="'Đạt'">Đánh giá</td>
 								<td th:if="${lo.percent < 50}" th:text="'Chưa Đạt'">Đánh giá</td>
+								<td th:text="${lo.learningOutcome.department.nameDepartment}">khoa</td>
 							</tr>
 
 						</tbody>

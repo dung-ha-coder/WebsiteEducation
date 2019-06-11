@@ -53,4 +53,11 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findByDepartmentAndRoleList(department, listRole);
 	}
 
+	@Override
+	public List<User> findAllLecturer() {
+		List<Role> listRole = new ArrayList<Role>();
+		listRole.add(new Role(2));
+		return userRepository.findByRoleList(listRole);
+	}
+
 }

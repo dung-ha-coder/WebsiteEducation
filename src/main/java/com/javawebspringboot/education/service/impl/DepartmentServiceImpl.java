@@ -1,5 +1,7 @@
 package com.javawebspringboot.education.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +16,12 @@ public class DepartmentServiceImpl  implements DepartmentService{
 
 	@Override
 	public Department findByIdDepartment(Integer idDepartment) {
-		// TODO Auto-generated method stub
 		return departmentRepository.findByIdDepartment(idDepartment);
+	}
+
+	@Override
+	public List<Department> findAllDepartment() {
+		return departmentRepository.findAll();
 	}
 
 }

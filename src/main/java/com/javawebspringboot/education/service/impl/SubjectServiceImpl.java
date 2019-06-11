@@ -128,8 +128,7 @@ public class SubjectServiceImpl implements SubjectService {
 			} catch (IOException e) {
 
 				return null;
-			}
-			finally {
+			} finally {
 				try {
 					workbook.close();
 				} catch (IOException e) {
@@ -460,5 +459,11 @@ public class SubjectServiceImpl implements SubjectService {
 	@Override
 	public List<Subject> findAllByOrderByStartTimeAsc() {
 		return subjectRepository.findAllByOrderByStartTimeAsc();
+	}
+
+	@Override
+	public void newSubject(Subject subject) {
+		subjectRepository.save(subject);
+
 	}
 }

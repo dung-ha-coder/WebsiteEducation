@@ -12,17 +12,17 @@
 	<!-- Page Content -->
 	<div class="container">
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-sm-12 col-md-6 col-lg-4">
 				<div th:replace="student/template/sidebar::sidebar"></div>
 			</div>
 			<!-- Post Content Column -->
-			<div class="col-lg-8">
+			<div class="col-sm-12 col-md-6 col-lg-8">
 
-				<div class="card my-2">
+				<div class="card mt-2">
 					<h5 class="card-header">Danh sách các môn học</h5>
 				</div>
 
-				<div class="card my-2" th:each="subject : ${user.subjects}">
+				<div class="card my-1" th:each="subject : ${user.subjects}">
 					<div class="card-body card_body_monhoc" style="padding: 12px 20px;">
 						<h4 style="font-size: 18px;">
 							<a th:href="@{/chuan-mon-hoc/subject/} + ${subject.idSubject}"

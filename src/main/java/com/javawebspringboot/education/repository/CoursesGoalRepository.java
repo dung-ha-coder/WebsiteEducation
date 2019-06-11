@@ -11,6 +11,17 @@ import com.javawebspringboot.education.model.Subject;
 
 @Repository
 @Transactional
-public interface CoursesGoalRepository extends JpaRepository<CoursesGoal, Integer>{
+public interface CoursesGoalRepository extends JpaRepository<CoursesGoal, Integer> {
 	List<CoursesGoal> findBySubjectOrderBySignAsc(Subject subject);
+
+	List<CoursesGoal> findBySubject(Subject subject);
+
+	CoursesGoal findByIdCoursesGoal(Integer idCoursesGoal);
+
+	void deleteByIdCoursesGoal(Integer idCoursesGoal);
+
+//	@Modifying
+//	@Query("UPDATE CoursesGoal cg SET cg.learningOutcomeList = ?1")
+//	void saveCoursesGoal(List<LearningOutcome> learningOutcomeList);
+
 }

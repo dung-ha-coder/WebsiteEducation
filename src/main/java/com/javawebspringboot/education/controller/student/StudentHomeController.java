@@ -16,12 +16,15 @@ import com.javawebspringboot.education.model.User;
 import com.javawebspringboot.education.model.UserSubjectCoursesGoal;
 import com.javawebspringboot.education.service.ScoresService;
 import com.javawebspringboot.education.service.SubjectService;
+import com.javawebspringboot.education.service.UserLearningOutcomeService;
 import com.javawebspringboot.education.service.UserService;
 import com.javawebspringboot.education.service.UserSubjectCoursesGoalService;
 
 @Controller
 public class StudentHomeController {
 	
+	@Autowired
+	private UserLearningOutcomeService userLearningOutcomeService;
 
 	@Autowired
 	private UserService userServiece;
@@ -82,7 +85,7 @@ public class StudentHomeController {
 	public String xemChuanDauRa(Model model) {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		User user = userServiece.findByUsername(userDetails.getUsername());
-		model.addAttribute("listLO", user.getUserLearningoutcomeList());
+		model.addAttribute("listLO", userLearningOutcomeService.findByUser(user));
 		return "student/learningOutcome";
 	}
 

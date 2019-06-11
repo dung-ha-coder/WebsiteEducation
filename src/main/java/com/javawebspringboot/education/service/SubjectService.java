@@ -18,4 +18,6 @@ public interface SubjectService {
 	
 	List<Subject> findAllByOrderByStartTimeAsc();
 	
+	void newSubject(Subject subject);
+	
 }

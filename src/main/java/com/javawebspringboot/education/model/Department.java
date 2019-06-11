@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,15 +35,40 @@ public class Department implements Serializable {
 	@OneToMany(mappedBy = "department")
 	private List<User> userList;
 
+	@OneToMany(mappedBy = "department", fetch = FetchType.LAZY)
+	private List<LearningOutcome> learningOutcomeList;
+
+	@OneToMany(mappedBy = "department")
+	private List<Subject> subjectList;
+
 	public Department() {
 		super();
 	}
 
-	public Department(String nameDepartment, User userHeadDepartment, List<User> userList) {
+	public Department(String nameDepartment, User userHeadDepartment, List<User> userList,
+			List<LearningOutcome> learningOutcomeList, List<Subject> subjectList) {
 		super();
 		this.nameDepartment = nameDepartment;
 		this.userHeadDepartment = userHeadDepartment;
 		this.userList = userList;
+		this.learningOutcomeList = learningOutcomeList;
+		this.subjectList = subjectList;
+	}
+
+	public List<Subject> getSubjectList() {
+		return subjectList;
+	}
+
+	public void setSubjectList(List<Subject> subjectList) {
+		this.subjectList = subjectList;
+	}
+
+	public List<LearningOutcome> getLearningOutcomeList() {
+		return learningOutcomeList;
+	}
+
+	public void setLearningOutcomeList(List<LearningOutcome> learningOutcomeList) {
+		this.learningOutcomeList = learningOutcomeList;
 	}
 
 	public User getUserHeadDepartment() {
