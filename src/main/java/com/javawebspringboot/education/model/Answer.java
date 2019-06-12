@@ -40,15 +40,47 @@ public class Answer implements Serializable {
 	@ManyToMany(fetch = FetchType.LAZY)
 	private List<CoursesGoal> coursesGoalList;
 
+	@Column(name = "content_answer")
+	private String contentAnswer;
+
 	public Answer() {
 		super();
 	}
 
-	public Answer(Integer idExam, Subject subject, List<CoursesGoal> coursesGoalList) {
+	public Answer(Integer idExam, Subject subject, List<CoursesGoal> coursesGoalList, String contentAnswer) {
 		super();
 		this.idExam = idExam;
 		this.subject = subject;
 		this.coursesGoalList = coursesGoalList;
+		this.contentAnswer = contentAnswer;
+	}
+
+	public Answer(Integer idExam, String contentAnswer) {
+		super();
+		this.idExam = idExam;
+		this.contentAnswer = contentAnswer;
+	}
+	
+	
+
+	public Answer(Integer idExam, Subject subject, String contentAnswer) {
+		super();
+		this.idExam = idExam;
+		this.subject = subject;
+		this.contentAnswer = contentAnswer;
+	}
+
+	public Answer(Integer idExam) {
+		super();
+		this.idExam = idExam;
+	}
+
+	public String getContentAnswer() {
+		return contentAnswer;
+	}
+
+	public void setContentAnswer(String contentAnswer) {
+		this.contentAnswer = contentAnswer;
 	}
 
 	public Integer getIdAnswer() {

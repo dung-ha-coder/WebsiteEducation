@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.javawebspringboot.education.model.Answer;
 import com.javawebspringboot.education.model.CoursesGoal;
 import com.javawebspringboot.education.model.LearningOutcome;
 import com.javawebspringboot.education.model.Subject;
 import com.javawebspringboot.education.model.User;
+import com.javawebspringboot.education.service.AnswerService;
 import com.javawebspringboot.education.service.CoursesGoalService;
 import com.javawebspringboot.education.service.DepartmentService;
 import com.javawebspringboot.education.service.LearningOutcomeService;
@@ -30,6 +32,10 @@ import com.javawebspringboot.education.service.UserService;
 
 @Controller
 public class ManageController {
+
+	@Autowired
+	private AnswerService answerService;
+
 	@Autowired
 	private CoursesGoalService coursesGoalService;
 
@@ -134,6 +140,7 @@ public class ManageController {
 
 	@RequestMapping(value = "/manage/them-mon-hoc", method = RequestMethod.POST)
 	public String newSubject(Model model, @ModelAttribute(name = "newSubject") Subject newSubject) {
+
 		subjectService.newSubject(newSubject);
 		return "redirect:/manage/xem-danh-sach-cac-mon-hoc";
 	}
@@ -177,5 +184,53 @@ public class ManageController {
 			@PathVariable(name = "idCoursesGoal") Integer idCoursesGoal) {
 		coursesGoalService.editCoursesGoal(idLOList, txtCoursesGoal, idCoursesGoal);
 		return "redirect:/manage/xem-thong-tin-mon-hoc/{idSubject}";
+	}
+
+	@RequestMapping("/manage/them-cau-hoi/subject/{idSubject}")
+	public String newAnswer(@PathVariable(name = "idSubject") Integer idSubject,
+			@RequestParam(name = "idExam") Integer idExam, @RequestParam(name = "contentAnswer") String contentAnswer) {
+
+		subjectService.saveAnswer(idSubject, idExam, contentAnswer);
+		return "redirect:/manage/xem-thong-tin-mon-hoc/{idSubject}";
+	}
+
+	@RequestMapping("/manage/xoa-cau-hoi/subject/{idSubject}/answer/{idAnswer}")
+	public String deleteAnswer(@PathVariable(name = "idSubject") Integer idSubject,
+			@PathVariable(name = "idAnswer") Integer idAnswer) {
+		answerService.deleteAnswer(idAnswer);
+		return "redirect:/manage/xem-thong-tin-mon-hoc/{idSubject}";
+	}
+
+	@RequestMapping("/manage/sua-cau-hoi/subject/{idSubject}/answer/{idAnswer}")
+	public String updateAnswer(Model model, @PathVariable(name = "idSubject") Integer idSubject,
+			@PathVariable(name = "idAnswer") Integer idAnswer) {
+
+		// chua tat ca cac G cua mon hoc
+		Subject subject = subjectService.findByIdSubject(idSubject);
+
+		Answer answer = answerService.findByIdAnswer(idAnswer);
+
+		model.addAttribute("answer", answer);
+
+		for (int i = 0; i < subject.getCoursesGoalList().size(); i++) {
+			for (int j = 0; j < answer.getCoursesGoalList().size(); j++) {
+				if (subject.getCoursesGoalList().get(i).equals(answer.getCoursesGoalList().get(j))) {
+					subject.getCoursesGoalList().remove(answer.getCoursesGoalList().get(j));
+				}
+			}
+		}
+		model.addAttribute("subject", subject);
+
+		return "manage/editAnswer";
+	}
+
+	@RequestMapping("/manage/chinh-sua-cau-hoi/subject/{idSubject}/answer/{idAnswer}")
+	public String editAnswerAndCoursesGoal(@RequestParam(name = "idExam") Integer idExam,
+			@RequestParam(name = "contentAnswer") String contentAnswer,
+			@RequestParam(name = "g", required = false, defaultValue = "0") List<Integer> idGList,
+			@PathVariable(name = "idSubject") Integer idSubject,
+			@PathVariable(name = "idAnswer") Integer idAnswer) {
+		answerService.editAnswer(idGList,idAnswer,idExam, contentAnswer);
+		return "redirect:/manage/sua-cau-hoi/subject/{idSubject}/answer/{idAnswer}";
 	}
 }

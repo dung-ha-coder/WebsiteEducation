@@ -3,6 +3,7 @@ package com.javawebspringboot.education.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,6 +15,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name = "learningoutcome")
@@ -36,7 +41,7 @@ public class LearningOutcome implements Serializable {
 	@JoinColumn(name = "id_department")
 	private Department department;
 
-	@OneToMany(mappedBy = "learningOutcome", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "learningOutcome", cascade = CascadeType.REMOVE,fetch = FetchType.EAGER)
 	private List<UserLearningOutcome> userLearningOutcomeList;
 
 	//

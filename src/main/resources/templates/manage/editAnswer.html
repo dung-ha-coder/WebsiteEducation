@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="manage/template/head::head"></head>
+
+<body class="app sidebar-mini rtl">
+	<!-- Navbar-->
+	<header th:replace="manage/template/header::header"> </header>
+	<!-- Sidebar menu-->
+	<aside th:replace="manage/template/sidebar::sidebar"></aside>
+
+	<div class="app-content">
+		<div class="row">
+			<div class="col col-md-12">
+				<h4
+					th:text="'DANH SÁCH CÂU HỎI MÔN HỌC ' + ${#strings.toUpperCase(subject.nameSubject)}"></h4>
+				<table class="table table-hover table-bordered">
+					<thead class="thead-dark">
+						<tr>
+							<th>STT</th>
+							<th>Tên kì thi</th>
+							<th>Nội dung câu hỏi</th>
+							<th>Sửa</th>
+							<th>Xóa</th>
+
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="answer, itrStat : ${subject.answerList}">
+							<td th:text="${itrStat.index + 1}">1</td>
+
+							<td th:if="${answer.idExam == 1}">Điểm quá trình</td>
+							<td th:if="${answer.idExam == 2}">Điểm thực hành</td>
+							<td th:if="${answer.idExam == 3}">Điểm giữa kì</td>
+							<td th:if="${answer.idExam == 4}">Điểm cuối kì</td>
+							<td th:text="${answer.contentAnswer}">ma mon hoc</td>
+							<td><a class="btn btn-success"
+								th:href="@{/manage/sua-cau-hoi/subject/}  + ${subject.idSubject} + '/answer/' + ${answer.idAnswer}">Sửa</a></td>
+							<td><a class="btn btn-danger"
+								th:href="@{/manage/xoa-cau-hoi/subject/} + ${subject.idSubject} + '/answer/' + ${answer.idAnswer}">Xóa</a></td>
+
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+
+			<div class="col col-md-12">
+
+				<h4>CHỈNH SỬA THÔNG TIN CÂU HỎI</h4>
+				<form
+					th:action="@{/manage/chinh-sua-cau-hoi/subject/} + ${subject.idSubject} + '/answer/' + ${answer.idAnswer}"
+					method="post">
+
+
+					<div class="form-group">
+						<label for="kithi">Chọn kì thi</label> <select
+							class="form-control" id="kithi" name="idExam">
+							<option th:if="${answer.idExam == 1}" selected="selected"
+								value="1">Điểm quá trình</option>
+							<option th:if="${answer.idExam != 1}" value="1">Điểm quá
+								trình</option>
+
+
+
+							<option th:if="${answer.idExam == 2}" selected="selected"
+								value="2">Thi thực hành</option>
+							<option th:if="${answer.idExam != 2}" value="2">Thi thực
+								hành</option>
+
+
+							<option th:if="${answer.idExam == 3}" selected="selected"
+								value="3">Thi giữa kì</option>
+							<option th:if="${answer.idExam != 3}" value="3">Thi giữa
+								kì</option>
+
+
+							<option th:if="${answer.idExam == 4}" selected="selected"
+								value="4">Thi cuối kì</option>
+							<option th:if="${answer.idExam != 4}" value="4">Thi cuối
+								kì</option>
+						</select>
+					</div>
+
+
+					<div class="form-group">
+						<label for="contentAnswer">Nhập nội dung câu hỏi</label>
+						<textarea class="form-control" name="contentAnswer"
+							th:text="${answer.contentAnswer}" id="contentAnswer"
+							style="font-size: 17px;" rows="2"></textarea>
+					</div>
+
+
+					<div class="form-group">
+						<label for="exampleFormControlTextarea2"
+							th:text="'Chỉnh sửa các mục tiêu của môn học ' + ${subject.nameSubject}"></label>
+						<div class="card">
+							<div class="card-body"
+								style="padding: 6px 12px; font-size: 17px;">
+
+								<div class="form-check my-1"
+									th:each="g : ${answer.coursesGoalList}">
+									<input class="form-check-input" type="checkbox" name="g"  checked="checked"
+										th:value="${g.idCoursesGoal}" th:id="${g.idCoursesGoal}">
+									<label class="form-check-label" th:for="${g.idCoursesGoal}"
+										th:text="${g.sign} + ' - ' + ${g.nameCoursesGoal}"></label>
+								</div>
+								
+								<div class="form-check my-1"
+									th:each="g : ${subject.coursesGoalList}">
+									<input class="form-check-input" type="checkbox" name="g"
+										th:value="${g.idCoursesGoal}" th:id="${g.idCoursesGoal}">
+									<label class="form-check-label" th:for="${g.idCoursesGoal}"
+										th:text="${g.sign} + ' - ' + ${g.nameCoursesGoal}"></label>
+								</div>
+
+							</div>
+						</div>
+
+					</div>
+
+
+					<button type="submit" style="font-size: 18px"
+						class="btn btn-primary mb-2">Cập nhật</button>
+
+				</form>
+
+			</div>
+			<div class="col col-md-12">
+				<footer th:replace="manage/template/footer::footer"></footer>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>

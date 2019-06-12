@@ -18,4 +18,5 @@ public interface LearningOutcomeRepository extends JpaRepository<LearningOutcome
 	
 	LearningOutcome findByIdLearningOutcome(Integer idLearningOutcome);
 	
+	void deleteByIdLearningOutcome(Integer idLearningOutcome);
 }

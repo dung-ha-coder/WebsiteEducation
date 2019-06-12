@@ -3,6 +3,7 @@ package com.javawebspringboot.education.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -35,7 +36,7 @@ public class Department implements Serializable {
 	@OneToMany(mappedBy = "department")
 	private List<User> userList;
 
-	@OneToMany(mappedBy = "department", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "department", cascade=  CascadeType.REMOVE, fetch=FetchType.LAZY)
 	private List<LearningOutcome> learningOutcomeList;
 
 	@OneToMany(mappedBy = "department")

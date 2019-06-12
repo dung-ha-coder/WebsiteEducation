@@ -20,8 +20,4 @@ public interface CoursesGoalRepository extends JpaRepository<CoursesGoal, Intege
 
 	void deleteByIdCoursesGoal(Integer idCoursesGoal);
 
-//	@Modifying
-//	@Query("UPDATE CoursesGoal cg SET cg.learningOutcomeList = ?1")
-//	void saveCoursesGoal(List<LearningOutcome> learningOutcomeList);
-
 }

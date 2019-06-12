@@ -14,4 +14,7 @@ import com.javawebspringboot.education.model.Subject;
 public interface AnswerRepository extends JpaRepository<Answer, Integer> {
 	List<Answer> findBySubjectAndIdExamOrderByIdExam(Subject subject, Integer idExam);
 
+	void deleteByIdAnswer(Integer idAnswer);
+	
+	Answer findByIdAnswer(Integer idAnswer);
 }

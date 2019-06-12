@@ -70,8 +70,9 @@ public class CoursesGoalServiceImpl implements CoursesGoalService {
 
 	@Override
 	public void editCoursesGoal(List<Integer> idLOList, String txtCoursesGoal, Integer idCoursesGoal) {
+		CoursesGoal coursesGoal = coursesGoalRepository.findByIdCoursesGoal(idCoursesGoal);
+
 		if (!idLOList.isEmpty()) {
-			CoursesGoal coursesGoal = coursesGoalRepository.findByIdCoursesGoal(idCoursesGoal);
 			List<LearningOutcome> lo = new ArrayList<LearningOutcome>();
 			for (Integer idLearningOutcome : idLOList) {
 
@@ -83,7 +84,6 @@ public class CoursesGoalServiceImpl implements CoursesGoalService {
 			coursesGoal.setLearningOutcomeList(lo);
 			coursesGoalRepository.save(coursesGoal);
 		} else {
-			CoursesGoal coursesGoal = coursesGoalRepository.findByIdCoursesGoal(idCoursesGoal);
 			coursesGoal.setNameCoursesGoal(txtCoursesGoal);
 			coursesGoal.setLearningOutcomeList(null);
 			coursesGoalRepository.save(coursesGoal);

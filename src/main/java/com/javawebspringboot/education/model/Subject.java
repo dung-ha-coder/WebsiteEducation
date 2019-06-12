@@ -69,7 +69,7 @@ public class Subject implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "subject", fetch = FetchType.LAZY)
 	private List<UserSubjectCoursesGoal> userSubjectCoursesgoalList;
 
-	@OneToMany(mappedBy = "subject", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "subject", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Answer> answerList;
 
 	@JoinColumn(name = "id_teacher", referencedColumnName = "id_user")

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head th:replace="lecturer/template/head::head"></head>
+
+<body>
+
+	<!-- Navigation -->
+	<nav th:replace="lecturer/template/nav::nav"></nav>
+	<header th:replace="lecturer/template/header::header"></header>
+	<!-- Page Content -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4">
+				<div th:replace="lecturer/template/sidebar::sidebar"></div>
+			</div>
+			<!-- Post Content Column -->
+			<div class="col-lg-8">
+
+				<div class="card mt-2 monhoc">
+					<h5 class="card-header">Các chuẩn đầu ra của khoa</h5>
+
+				</div>
+
+				<table class="table table-hover">
+					<thead class="thead-light">
+						<tr>
+							<th>STT</th>
+							<th>Kí hiệu</th>
+							<th>Tên chuẩn</th>
+							<th>Sửa</th>
+							<th>Xóa</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="lo, itrStat:${department.learningOutcomeList}">
+							<th th:text="${itrStat.index + 1}">1</th>
+							<td th:text="${lo.sign}">Mark</td>
+							<td th:text="${lo.nameLearningOutcome}">Otto</td>
+							<td><a class="btn btn-success" th:href="@{/lecturer/sua-learning-outcome/} + ${lo.idLearningOutcome}+'/khoa/'+ ${user.departments.idDepartment}">Sửa</a></td>
+							<td><a class="btn btn-danger" th:href="@{/lecturer/xoa-lo/} + ${lo.idLearningOutcome} +'/khoa/'+ ${user.departments.idDepartment}">Xóa</a></td>
+
+						</tr>
+
+					</tbody>
+				</table>
+
+
+				<div class="card mt-2 monhoc">
+					<h5 class="card-header">Thêm chuẩn đầu ra của khoa</h5>
+
+				</div>
+				<div>
+					<form method="post"
+						th:action="@{/lecturer/them-moi-lo/} + ${user.departments.idDepartment}">
+						<div class="form-group mb-2">
+							<textarea class="form-control form-control-lg" rows="3"
+								name="txtLO"></textarea>
+						</div>
+						<button type="submit" class="btn btn-primary mb-2">Thêm
+							mới</button>
+					</form>
+
+
+				</div>
+
+
+			</div>
+
+		</div>
+		<!-- /.row -->
+
+	</div>
+	<!-- /.container -->
+
+	<!-- Footer -->
+	<footer>
+		<div th:replace="lecturer/template/footer::footer"></div>
+	</footer>
+
+
+</body>
+
+</html>

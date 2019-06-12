@@ -25,9 +25,22 @@
 					<ul class="list-unstyled mb-0 sidebar_menu">
 
 						<li th:if="${user.departments != null}"><a
-							th:href="@{/lecturer/xem-danh-sach-user-trong-khoa/} + ${user.departments.idDepartment}"
+							style="color: black;"
 							th:text="'Trưởng khoa ' +${user.departments.nameDepartment}">Web
 								Design</a></li>
+
+						<li style="padding: 10px 50px;"
+							th:if="${user.departments != null}"><a
+							th:href="@{/lecturer/xem-danh-sach-user-trong-khoa/} + ${user.departments.idDepartment}">Xem
+								danh sách sinh viên khoa</a></li>
+								
+						
+						<li style="padding: 10px 50px;"
+							th:if="${user.departments != null}"><a
+							th:href="@{/lecturer/them-chuan-dau-ra-chuong-trinh-dao-tao/khoa/} + ${user.departments.idDepartment}">Thêm chuẩn đầu ra</a></li>
+								
+
+						
 
 						<li th:each="class :${user.livingClasseList}"><a
 							th:text="'Cố vấn học tập lớp ' + ${class.nameLivingClass}"

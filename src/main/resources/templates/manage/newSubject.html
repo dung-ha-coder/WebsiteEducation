@@ -55,7 +55,8 @@
 										th:field="*{practiceTeacher}"
 										class="form-control form-control-lg" id="gvth">
 										<option th:each="practiceTeacher : ${listLecturer}"
-											th:text="${practiceTeacher.username}" th:value="${practiceTeacher.idUser}">1</option>
+											th:text="${practiceTeacher.username}"
+											th:value="${practiceTeacher.idUser}">1</option>
 
 									</select>
 
@@ -76,7 +77,8 @@
 										th:field="*{department}" class="form-control form-control-lg"
 										id="khoaql">
 										<option th:each="department : ${listDepartment}"
-											th:text="${department.nameDepartment}" th:value="${department.idDepartment}">1</option>
+											th:text="${department.nameDepartment}"
+											th:value="${department.idDepartment}">1</option>
 									</select>
 
 								</div>

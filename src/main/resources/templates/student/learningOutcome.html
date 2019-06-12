@@ -28,7 +28,6 @@
 								<th>STT</th>
 								<th>Kí hiệu</th>
 								<th>Tên chuẩn</th>
-								<th>ID</th>
 								<th>Tỉ lệ hoàn thành</th>
 								<th>Đánh giá</th>
 								<th>Khoa</th>
@@ -41,7 +40,6 @@
 								<td th:text="${itrStat.index + 1}">1</td>
 								<td th:text="${lo.learningOutcome.sign}">Kí hiệu</td>
 								<td th:text="${lo.learningOutcome.nameLearningOutcome}">Tên chuẩn</td>
-								<td th:text="${lo.learningOutcome.idLearningOutcome}"></td>
 								<td th:if="${lo.percent != null}" th:text="${lo.percent + '%'}">Tỉ
 									lệ</td>
 								<td th:if="${lo.percent == null}" th:text="'-'">Tỉ

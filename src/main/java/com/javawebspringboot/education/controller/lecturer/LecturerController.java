@@ -19,6 +19,7 @@ import com.javawebspringboot.education.model.ScoresTable;
 import com.javawebspringboot.education.model.Subject;
 import com.javawebspringboot.education.model.User;
 import com.javawebspringboot.education.service.DepartmentService;
+import com.javawebspringboot.education.service.LearningOutcomeService;
 import com.javawebspringboot.education.service.LivingClassService;
 import com.javawebspringboot.education.service.ScoresService;
 import com.javawebspringboot.education.service.SubjectService;
@@ -27,6 +28,9 @@ import com.javawebspringboot.education.utiles.TableScore;
 
 @Controller
 public class LecturerController {
+	@Autowired
+	private LearningOutcomeService learningOutcomeService;
+
 	@Autowired
 	private LivingClassService livingClassService;
 
@@ -192,4 +196,55 @@ public class LecturerController {
 		return "redirect:/lecturer/subject/{idSubject}";
 	}
 
+	@RequestMapping("/lecturer/them-chuan-dau-ra-chuong-trinh-dao-tao/khoa/{idDepartment}")
+	public String addLearningOutcome(Model model, @PathVariable(name = "idDepartment") Integer idDepartment) {
+		// menu
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		User user = userService.findByUsername(userDetails.getUsername());
+		model.addAttribute("user", user);
+
+		model.addAttribute("department", departmentService.findByIdDepartment(idDepartment));
+
+		return "lecturer/addLearningOutcome";
+	}
+
+	@RequestMapping("/lecturer/them-moi-lo/{idDepartment}")
+	public String newLearningOutcome(Model model, @PathVariable(name = "idDepartment") Integer idDepartment,
+			@RequestParam(name = "txtLO") String txtLO) {
+		Department department = departmentService.findByIdDepartment(idDepartment);
+		model.addAttribute("department", department);
+
+		learningOutcomeService.newLearningOutcome(department, txtLO);
+		return "redirect:/lecturer/them-chuan-dau-ra-chuong-trinh-dao-tao/khoa/{idDepartment}";
+	}
+
+	@RequestMapping("/lecturer/xoa-lo/{idLearningOutcome}/khoa/{idDepartment}")
+	public String xoaLo(Model model, @PathVariable(name = "idLearningOutcome") Integer idLearningOutcome,
+			@PathVariable(name = "idDepartment") Integer idDepartment) {
+
+		learningOutcomeService.delteLearningOutcome(idLearningOutcome);
+
+		return "redirect:/lecturer/them-chuan-dau-ra-chuong-trinh-dao-tao/khoa/{idDepartment}";
+	}
+
+	@RequestMapping("/lecturer/sua-learning-outcome/{idLearningOutcome}/khoa/{idDepartment}")
+	public String showEditFormLO(Model model, @PathVariable(name = "idLearningOutcome") Integer idLearningOutcome,
+			@PathVariable(name = "idDepartment") Integer idDepartment) {
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		User user = userService.findByUsername(userDetails.getUsername());
+		model.addAttribute("user", user);
+		Department department = departmentService.findByIdDepartment(idDepartment);
+		model.addAttribute("department", department);
+		model.addAttribute("lo", learningOutcomeService.findByIdLearningOutcome(idLearningOutcome));
+		return "lecturer/editLO";
+	}
+
+	@RequestMapping("/lecturer/edit-learning-outcome/{idLearningOutcome}/khoa/{idDepartment}")
+	public String eidtLo(@PathVariable(name = "idLearningOutcome") Integer idLearningOutcome,
+			@PathVariable(name = "idDepartment") Integer idDepartment,
+			@RequestParam(name = "txtLOEdit") String txtLOEdit) {
+		learningOutcomeService.editLO(idLearningOutcome,txtLOEdit);
+		return "redirect:/lecturer/them-chuan-dau-ra-chuong-trinh-dao-tao/khoa/{idDepartment}";
+
+	}
 }

@@ -466,4 +466,15 @@ public class SubjectServiceImpl implements SubjectService {
 		subjectRepository.save(subject);
 
 	}
+
+	@Override
+	public void saveAnswer(Integer idSubject, Integer idExam, String contentAnswer) {
+
+		Subject subject = subjectRepository.findByIdSubject(idSubject);
+		Answer answer = new Answer(idExam, subject, contentAnswer);
+		List<Answer> list = new ArrayList<>();
+		list.add(answer);
+		subject.setAnswerList(list);
+		subjectRepository.save(subject);
+	}
 }
