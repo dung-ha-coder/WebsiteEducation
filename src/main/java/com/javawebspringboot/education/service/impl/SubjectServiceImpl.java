@@ -463,6 +463,7 @@ public class SubjectServiceImpl implements SubjectService {
 
 	@Override
 	public void newSubject(Subject subject) {
+		
 		subjectRepository.save(subject);
 
 	}
@@ -476,5 +477,10 @@ public class SubjectServiceImpl implements SubjectService {
 		list.add(answer);
 		subject.setAnswerList(list);
 		subjectRepository.save(subject);
+	}
+
+	@Override
+	public List<Subject> findByTeacher(User user) {
+		return subjectRepository.findByTeacher(user);
 	}
 }

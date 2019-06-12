@@ -57,10 +57,10 @@ public class Subject implements Serializable {
 	@Column(name = "number_of_credit")
 	private Integer numberOfCredits;
 
-	@ManyToMany(mappedBy = "subjects")
+	@ManyToMany(mappedBy = "subjects", cascade = CascadeType.ALL)
 	private List<User> userList;
 
-	@OneToMany(mappedBy = "subject", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "subject", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	private List<CoursesGoal> coursesGoalList;
 
 	@OneToMany(mappedBy = "subject", fetch = FetchType.LAZY)
@@ -73,11 +73,11 @@ public class Subject implements Serializable {
 	private List<Answer> answerList;
 
 	@JoinColumn(name = "id_teacher", referencedColumnName = "id_user")
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private User teacher;
 
 	@JoinColumn(name = "id_practice_teacher", referencedColumnName = "id_user")
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private User practiceTeacher;
 
 	@OneToOne
@@ -273,5 +273,8 @@ public class Subject implements Serializable {
 	public void setAnswerList(List<Answer> answerList) {
 		this.answerList = answerList;
 	}
+	
+	
+	
 
 }

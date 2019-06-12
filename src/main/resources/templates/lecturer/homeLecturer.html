@@ -23,10 +23,13 @@
 
 				</div>
 
-				<div class="card mt-1" th:each="subject : ${user.subjects}">
+				<div class="card mt-1" th:each="subject : ${subject}">
 					<div class="card-body card_body_monhoc" style="padding: 12px 20px;">
 						<h4 style="font-size: 18px;">
 							<a th:href="@{/lecturer/subject/} + ${subject.idSubject}"
+								th:text="${subject.nameSubject} + '-' +${subject.codeSubject}">Tối ưu hóa công cụ tìm kiếm
+								- IE204.J21</a>
+								<a th:href="@{/lecturer/subject/} + ${#numbers.formatInteger(subject.idSubject,0,'POINT')}"
 								th:text="${subject.nameSubject} + '-' +${subject.codeSubject}">Tối ưu hóa công cụ tìm kiếm
 								- IE204.J21</a>
 						</h4>

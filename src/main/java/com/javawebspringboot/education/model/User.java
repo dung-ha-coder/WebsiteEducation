@@ -42,7 +42,7 @@ public class User implements Serializable {
 	@Column(name = "day_of_birth")
 	private Date dayOfBirth;
 
-	@ManyToMany()
+	@ManyToMany
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "id_user", referencedColumnName = "id_user"), inverseJoinColumns = @JoinColumn(name = "id_role", referencedColumnName = "id_role"))
 	private List<Role> roleList;
 
@@ -77,7 +77,7 @@ public class User implements Serializable {
 	@JoinColumn(name = "id_living_class", referencedColumnName = "id_living_class")
 	private LivingClass livingClass;
 
-	@OneToMany(mappedBy = "teacher", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "teacher", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Subject> listSubjectTeacher;
 
 	@OneToMany(mappedBy = "practiceTeacher", fetch = FetchType.LAZY)

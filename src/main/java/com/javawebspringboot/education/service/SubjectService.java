@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.javawebspringboot.education.exception.ReadFileException;
 import com.javawebspringboot.education.model.Subject;
+import com.javawebspringboot.education.model.User;
 import com.javawebspringboot.education.utiles.TableScore;
 
 public interface SubjectService {
@@ -21,5 +22,7 @@ public interface SubjectService {
 	void newSubject(Subject subject);
 
 	void saveAnswer(Integer idSubject, Integer idExam, String contentAnswer);
+	
+	List<Subject> findByTeacher(User user);
 
 }
