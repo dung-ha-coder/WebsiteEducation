@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.javawebspringboot.education.exception.ReadFileException;
@@ -26,6 +25,9 @@ import com.javawebspringboot.education.service.ScoresService;
 import com.javawebspringboot.education.service.SubjectService;
 import com.javawebspringboot.education.service.UserService;
 import com.javawebspringboot.education.utiles.TableScore;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class LecturerController {
@@ -251,5 +253,13 @@ public class LecturerController {
         learningOutcomeService.editLO(idLearningOutcome, txtLOEdit);
         return "redirect:/lecturer/them-chuan-dau-ra-chuong-trinh-dao-tao/khoa/{idDepartment}";
 
+    }
+
+    @RequestMapping("/lecturer/tao-file-excel/mon-hoc/{idSubject}/diem/{strCotDiem}")
+    public void createFileExcel(HttpServletResponse response, @PathVariable(name = "idSubject") Integer idSubject,
+            @PathVariable(name = "strCotDiem") String strCotDiem) throws FileNotFoundException, IOException {
+
+        subjectService.dowloadFile(idSubject,strCotDiem,response);
+        
     }
 }

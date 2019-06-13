@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="student/template/head::head"></head>
+
+
+<body>
+
+    <!-- Navigation -->
+    <nav th:replace="student/template/nav::nav"></nav>
+    <header th:replace="student/template/header::header"></header>
+    <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div th:replace="student/template/sidebar::sidebar"></div>
+            </div>
+            <!-- Post Content Column -->
+            <div class="col-sm-12 col-md-6 col-lg-8">
+
+                <div class="card mt-2">
+                    <h5 class="card-header">Danh sách các môn học</h5>
+
+
+                    <table class="table table-hover table-bordered mb-2">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>STT</th>
+                                <th>Tên môn học</th>
+                                <th>Giáo viên lý thuyết </th>
+                                <th>Giáo viên thực hành</th>
+                                <th>Khoa quản lý</th>
+                                <th>Đăng ký môn học</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="subject, itrStat : ${listSubject}">
+                                <td th:text="${itrStat.index + 1}">1</td>
+                                <td th:text="${subject.nameSubject}"></td>
+                                <td th:text="${subject.teacher.username}"></td>
+
+                                <td th:if="${subject.practiceTeacher.username == null}" th:text="'null'"></td>
+
+                                <td th:if="${subject.practiceTeacher.username != null}" th:text="${subject.practiceTeacher.username}"></td>
+                                <td th:text="${subject.department.nameDepartment}"></td>
+                                <td>
+                                    <a th:href="@{/student/} + ${user.idUser} + '/dang-ki-mon-hoc/' + ${subject.idSubject}" role="submit" class="btn btn-primary">Đăng ký</a>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <!-- /.row -->
+
+        </div>
+        <!-- /.container -->
+
+        <!-- Footer -->
+        <footer>
+            <div th:replace="student/template/footer::footer"></div>
+        </footer>
+
+
+</body>
+
+</html>

@@ -19,17 +19,16 @@
             <div class="col-sm-12 col-md-6 col-lg-8">
 
                 <div class="card mt-2">
-                    <h5 class="card-header">Danh sách các môn học đang học</h5>
+                    <h5 class="card-header">Danh sách các môn học đã hoàn thành</h5>
                 </div>
-                <div class="card my-1" th:each="subject : ${user.subjects}">
-
+                <div class="card my-1" th:each="subject : ${listSubject}">
                     <div class="card-body card_body_monhoc" style="padding: 12px 20px;">
                         <h4 style="font-size: 18px;">
                             <a th:href="@{/chuan-mon-hoc/subject/} + ${subject.idSubject}" th:text="${subject.nameSubject}">Tối ưu hóa công cụ tìm kiếm
                                 - IE204.J21</a>
                         </h4>
-                        <p style="margin: 0px" th:text=" 'Giáo viên giảng dạy: ' + ${subject.teacher.username} ">Giáo viên giảng dạy: adsfads</p>
-                        <p style="margin: 0px" th:if="${subject.practiceTeacher.username !=null}" th:text="'Giáo viên thực hành: ' +${subject.practiceTeacher.username} ">Giáo viên thực hành: adsfads</p>
+                        <p style="margin: 0px">Giáo viên giảng dạy: adsfads</p>
+                        <p style="margin: 0px">Giáo viên thực hành: adsfads</p>
                         <p style="margin: 0px">Số tín chỉ: 4</p>
 
                     </div>

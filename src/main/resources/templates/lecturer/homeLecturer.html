@@ -1,62 +1,52 @@
 <!DOCTYPE html>
-<html lang="vi" xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html lang="vi" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head th:replace="lecturer/template/head::head"></head>
 
 <body>
 
-	<!-- Navigation -->
-	<nav th:replace="lecturer/template/nav::nav"></nav>
-	<header th:replace="lecturer/template/header::header"></header>
-	<!-- Page Content -->
-	<div class="container">
-		<div class="row">
-			<div class="col-md-4">
-				<div th:replace="lecturer/template/sidebar::sidebar"></div>
-			</div>
-			<!-- Post Content Column -->
-			<div class="col-lg-8">
+    <!-- Navigation -->
+    <nav th:replace="lecturer/template/nav::nav"></nav>
+    <header th:replace="lecturer/template/header::header"></header>
+    <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div th:replace="lecturer/template/sidebar::sidebar"></div>
+            </div>
+            <!-- Post Content Column -->
+            <div class="col-lg-8">
 
-				<div class="card mt-2 monhoc">
-					<h5 class="card-header">Danh sách các môn học</h5>
+                <div class="card mt-2 monhoc">
+                    <h5 class="card-header">Danh sách các môn học</h5>
 
-				</div>
+                </div>
 
-				<div class="card mt-1" th:each="subject : ${subject}">
-					<div class="card-body card_body_monhoc" style="padding: 12px 20px;">
-						<h4 style="font-size: 18px;">
-							<a th:href="@{/lecturer/subject/} + ${subject.idSubject}"
-								th:text="${subject.nameSubject} + '-' +${subject.codeSubject}">Tối ưu hóa công cụ tìm kiếm
+                <div class="card mt-1" th:each="subject : ${subject}">
+                    <div class="card-body card_body_monhoc" style="padding: 12px 20px;">
+                        <h4 style="font-size: 18px;">
+                            <a th:href="@{/lecturer/subject/} + ${subject.idSubject}" th:text="${subject.nameSubject} + '-' +${subject.codeSubject}">Tối ưu hóa công cụ tìm kiếm
 								- IE204.J21</a>
-								<a th:href="@{/lecturer/subject/} + ${#numbers.formatInteger(subject.idSubject,0,'POINT')}"
-								th:text="${subject.nameSubject} + '-' +${subject.codeSubject}">Tối ưu hóa công cụ tìm kiếm
-								- IE204.J21</a>
-						</h4>
 
-						<p style="margin: 0px"
-							th:text="'Thời gian bắt đầu: '+${#dates.format(subject.startTime, 'dd-MM-yyyy')}">tg
-							bat dau</p>
-						<p style="margin: 0px"
-							th:text="'Thời gian bắt đầu: '+${#dates.format(subject.endTime, 'dd-MM-yyyy')}">tg
-							ket thuc</p>
-						<p style="margin: 0px"
-							th:text="'Số tín chỉ: ' + ${subject.numberOfCredits}">Số tín
-							chỉ: 4</p>
-					</div>
-				</div>
-			</div>
+                        </h4>
 
-		</div>
-		<!-- /.row -->
+                        <p style="margin: 0px" th:text="'Thời gian bắt đầu: '+${#dates.format(subject.startTime, 'dd-MM-yyyy')}">tg bat dau</p>
+                        <p style="margin: 0px" th:text="'Thời gian bắt đầu: '+${#dates.format(subject.endTime, 'dd-MM-yyyy')}">tg ket thuc</p>
+                        <p style="margin: 0px" th:text="'Số tín chỉ: ' + ${subject.numberOfCredits}">Số tín chỉ: 4</p>
+                    </div>
+                </div>
+            </div>
 
-	</div>
-	<!-- /.container -->
+        </div>
+        <!-- /.row -->
 
-	<!-- Footer -->
-	<footer>
-		<div th:replace="lecturer/template/footer::footer"></div>
-	</footer>
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <footer>
+        <div th:replace="lecturer/template/footer::footer"></div>
+    </footer>
 
 
 </body>

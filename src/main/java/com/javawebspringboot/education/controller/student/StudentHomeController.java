@@ -22,80 +22,130 @@ import com.javawebspringboot.education.service.UserSubjectCoursesGoalService;
 
 @Controller
 public class StudentHomeController {
-	
-	@Autowired
-	private UserLearningOutcomeService userLearningOutcomeService;
 
-	@Autowired
-	private UserService userServiece;
+    @Autowired
+    private UserLearningOutcomeService userLearningOutcomeService;
 
-	@Autowired
-	private SubjectService subjectService;
+    @Autowired
+    private UserService userServiece;
 
-	@Autowired
-	private ScoresService scoresService;
+    @Autowired
+    private SubjectService subjectService;
 
-	@Autowired
-	private UserSubjectCoursesGoalService userSubjectCoursesGoalService;
+    @Autowired
+    private ScoresService scoresService;
 
-	@RequestMapping("/student")
-	public String studentHomePage(Model model) {
-		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		User user = userServiece.findByUsername(userDetails.getUsername());
-		model.addAttribute("user", user);
+    @Autowired
+    private UserSubjectCoursesGoalService userSubjectCoursesGoalService;
 
-		return "student/homeStudent";
-	}
+    @RequestMapping("/student")
+    public String studentHomePage(Model model) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userServiece.findByUsername(userDetails.getUsername());
+        model.addAttribute("user", user);
+        
+        List<Subject> listSubject = userServiece.getListSubject(user.getSubjects());
+      
+        model.addAttribute("listSubject", listSubject);
 
-	@RequestMapping(value = "/chuan-mon-hoc/subject/{idSubject}")
-	public String showInfoSubject(@PathVariable(name = "idSubject") Integer idSubject, Model model) {
-		Subject subject = subjectService.findByIdSubject(idSubject);
-		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		User user = userServiece.findByUsername(userDetails.getUsername());
+        return "student/homeStudent";
+    }
 
-		List<UserSubjectCoursesGoal> list = userSubjectCoursesGoalService
-				.findByUserAndSubjectOrderByCoursesGoalAsc(user, subject);
-		model.addAttribute("userSubjectCoursesGoal", list);
-		List<String> label = new ArrayList<String>();
-		List<Float> point = new ArrayList<Float>();
-		for (UserSubjectCoursesGoal userSubjectCoursesGoal : list) {
-			label.add(userSubjectCoursesGoal.getCoursesGoal().getSign());
-			point.add(userSubjectCoursesGoal.getPercent());
-		}
+    @RequestMapping(value = "/chuan-mon-hoc/subject/{idSubject}")
+    public String showInfoSubject(@PathVariable(name = "idSubject") Integer idSubject, Model model) {
+        Subject subject = subjectService.findByIdSubject(idSubject);
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userServiece.findByUsername(userDetails.getUsername());
 
-		model.addAttribute("label", label);
-		model.addAttribute("point", point);
+        List<UserSubjectCoursesGoal> list = userSubjectCoursesGoalService
+                .findByUserAndSubjectOrderByCoursesGoalAsc(user, subject);
+        model.addAttribute("userSubjectCoursesGoal", list);
+        List<String> label = new ArrayList<String>();
+        List<Float> point = new ArrayList<Float>();
+        for (UserSubjectCoursesGoal userSubjectCoursesGoal : list) {
+            label.add(userSubjectCoursesGoal.getCoursesGoal().getSign());
+            point.add(userSubjectCoursesGoal.getPercent());
+        }
 
-		return "student/infoSubject";
-	}
+        model.addAttribute("label", label);
+        model.addAttribute("point", point);
 
-	@RequestMapping("/student/xem-bang-diem")
-	public String xemBangDiem(Model model) {
-		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		User user = userServiece.findByUsername(userDetails.getUsername());
+        return "student/infoSubject";
+    }
 
-		model.addAttribute("scoresTable", scoresService.findByUser(user));
-		model.addAttribute("sumNumberOfCredit", scoresService.sumNumberOfCredit(user));
-		model.addAttribute("avg", scoresService.scoreAvg(user));
+    @RequestMapping("/student/xem-bang-diem")
+    public String xemBangDiem(Model model) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userServiece.findByUsername(userDetails.getUsername());
 
-		return "student/scoresTableStudent";
-	}
+        model.addAttribute("scoresTable", scoresService.findByUser(user));
+        model.addAttribute("sumNumberOfCredit", scoresService.sumNumberOfCredit(user));
+        model.addAttribute("avg", scoresService.scoreAvg(user));
 
-	@RequestMapping("/student/xem-chuan-dau-ra")
-	public String xemChuanDauRa(Model model) {
-		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		User user = userServiece.findByUsername(userDetails.getUsername());
-		model.addAttribute("listLO", userLearningOutcomeService.findByUser(user));
-		return "student/learningOutcome";
-	}
+        return "student/scoresTableStudent";
+    }
 
-	@RequestMapping("/student/xem-thong-tin-ca-nhan")
-	public String xemThongTinCaNhan(Model model) {
+    @RequestMapping("/student/xem-chuan-dau-ra")
+    public String xemChuanDauRa(Model model) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userServiece.findByUsername(userDetails.getUsername());
+        model.addAttribute("listLO", userLearningOutcomeService.findByUser(user));
+        return "student/learningOutcome";
+    }
 
-		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		model.addAttribute("user", userServiece.findByUsername(userDetails.getUsername()));
+    @RequestMapping("/student/xem-thong-tin-ca-nhan")
+    public String xemThongTinCaNhan(Model model) {
 
-		return "student/studentProfile";
-	}
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("user", userServiece.findByUsername(userDetails.getUsername()));
+
+        return "student/studentProfile";
+    }
+
+    @RequestMapping("/student/dang-ky-mon-hoc")
+    public String registerSubject(Model model) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userServiece.findByUsername(userDetails.getUsername());
+        model.addAttribute("user", user);
+        List<Subject> listSubject = subjectService.registerSubject();
+        model.addAttribute("listSubject", listSubject);
+        return "student/registerSubject";
+    }
+
+    @RequestMapping("/student/{idUser}/dang-ki-mon-hoc/{idSubject}")
+    public String registerSb(@PathVariable(name = "idUser") Integer idUser,
+            @PathVariable(name = "idSubject") Integer idSubject) {
+        userServiece.registerSubject(idUser, idSubject);
+        return "redirect:/student/danh-sach-mon-hoc-dang-ky";
+    }
+
+    @RequestMapping("/student/danh-sach-mon-hoc-hoan-thanh")
+    public String subjectComplete(Model model) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userServiece.findByUsername(userDetails.getUsername());
+
+        model.addAttribute("user", user);
+
+        List<Subject> listSubject = userServiece.getListSubjectComplete(user.getSubjects());
+      
+        model.addAttribute("listSubject", listSubject);
+        return "student/subjectComplete";
+    }
+    
+    
+    //student/danh-sach-mon-hoc-dang-ky
+    
+    @RequestMapping("/student/danh-sach-mon-hoc-dang-ky")
+    public String subjectRegister(Model model) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userServiece.findByUsername(userDetails.getUsername());
+
+        model.addAttribute("user", user);
+
+        List<Subject> listSubject = userServiece.getListSubjectRegister(user.getSubjects());
+      
+        model.addAttribute("listSubject", listSubject);
+        return "student/subjectRegister";
+    }
 
 }

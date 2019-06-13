@@ -4,151 +4,113 @@
 <head th:replace="manage/template/head::head"></head>
 
 <body class="app sidebar-mini rtl">
-	<!-- Navbar-->
-	<header th:replace="manage/template/header::header"> </header>
-	<!-- Sidebar menu-->
-	<aside th:replace="manage/template/sidebar::sidebar"></aside>
+    <!-- Navbar-->
+    <header th:replace="manage/template/header::header"> </header>
+    <!-- Sidebar menu-->
+    <aside th:replace="manage/template/sidebar::sidebar"></aside>
 
-	<div class="app-content">
-		<div class="row">
-			<div class="col col-md-12">
-				<h4>Thêm môn học mới</h4>
+    <div class="app-content">
+        <div class="row">
+            <div class="col col-md-12">
+                <h4>Thêm môn học mới</h4>
 
-				<div class="card">
-					<div class="card-body" style="padding: 0.5rem;">
-						<form th:action="@{/manage/them-mon-hoc}" method="post"
-							th:object="${newSubject}">
+                <div class="card">
+                    <div class="card-body" style="padding: 0.5rem;">
+                        <form th:action="@{/manage/them-mon-hoc}" method="post" th:object="${newSubject}">
 
-							<div class="form-row">
-								<div class="form-group form-control-lg col-md-6"
-									style="padding: 0.5rem 1rem;">
-									<label for="tenmh">Tên môn học</label> <input type="text"
-										class="form-control form-control-lg" id="tenmh"
-										th:field="*{nameSubject}" placeholder="Nhập tên môn học">
-								</div>
-								<div class="form-group form-control-lg col-md-6"
-									style="padding: 0.5rem 1rem;">
-									<label for="mamh">Mã môn học</label> <input type="text"
-										class="form-control form-control-lg" id="mamh"
-										th:field="*{codeSubject}" placeholder="Nhập mã môn học">
-								</div>
-							</div>
+                            <div class="form-row">
+                                <div class="form-group form-control-lg col-md-6" style="padding: 0.5rem 1rem;">
+                                    <label for="tenmh">Tên môn học</label> <input type="text" class="form-control form-control-lg" id="tenmh" th:field="*{nameSubject}" placeholder="Nhập tên môn học">
+                                </div>
+                                <div class="form-group form-control-lg col-md-6" style="padding: 0.5rem 1rem;">
+                                    <label for="mamh">Mã môn học</label> <input type="text" class="form-control form-control-lg" id="mamh" th:field="*{codeSubject}" placeholder="Nhập mã môn học">
+                                </div>
+                            </div>
 
 
 
 
-							<div class="form-row">
-								<div class="form-group form-control-lg col-md-6"
-									style="padding: 0.5rem 1rem;">
-									<label for="gvlt">Giáo viên lý thuyết</label> <select
-										th:field="*{teacher}" class="form-control form-control-lg"
-										id="gvlt">
+                            <div class="form-row">
+                                <div class="form-group form-control-lg col-md-6" style="padding: 0.5rem 1rem;">
+                                    <label for="gvlt">Giáo viên lý thuyết</label> <select th:field="*{teacher}" class="form-control form-control-lg" id="gvlt">
 										<option th:each="teacher : ${listLecturer}"
 											th:text="${teacher.username}" th:value="${teacher.idUser}">1</option>
 									</select>
 
-								</div>
+                                </div>
 
-								<div class="form-group form-control-lg col-md-6"
-									style="padding: 0.5rem 1rem;">
-									<label for="gvth">Giáo viên thực hành</label> <select
-										th:field="*{practiceTeacher}"
-										class="form-control form-control-lg" id="gvth">
+                                <div class="form-group form-control-lg col-md-6" style="padding: 0.5rem 1rem;">
+                                    <label for="gvth">Giáo viên thực hành</label> <select th:field="*{practiceTeacher}" class="form-control form-control-lg" id="gvth">
 										<option th:each="practiceTeacher : ${listLecturer}"
 											th:text="${practiceTeacher.username}"
 											th:value="${practiceTeacher.idUser}">1</option>
 
 									</select>
 
-								</div>
+                                </div>
 
-							</div>
+                            </div>
 
-							<div class="form-row">
-								<div class="form-group form-control-lg col-md-6"
-									style="padding: 0.5rem 1rem;">
-									<label for="sotc">Số tín chỉ</label> <input type="number"
-										class="form-control form-control-lg" id="sotc"
-										th:field="*{numberOfCredits}" placeholder="Nhập số tín chỉ">
-								</div>
-								<div class="form-group form-control-lg col-md-6"
-									style="padding: 0.5rem 1rem;">
-									<label for="khoaql">Khoa quản lý môn học</label> <select
-										th:field="*{department}" class="form-control form-control-lg"
-										id="khoaql">
+                            <div class="form-row">
+                                <div class="form-group form-control-lg col-md-6" style="padding: 0.5rem 1rem;">
+                                    <label for="sotc">Số tín chỉ</label> <input type="number" class="form-control form-control-lg" id="sotc" th:field="*{numberOfCredits}" placeholder="Nhập số tín chỉ">
+                                </div>
+                                <div class="form-group form-control-lg col-md-6" style="padding: 0.5rem 1rem;">
+                                    <label for="khoaql">Khoa quản lý môn học</label> <select th:field="*{department}" class="form-control form-control-lg" id="khoaql">
 										<option th:each="department : ${listDepartment}"
 											th:text="${department.nameDepartment}"
 											th:value="${department.idDepartment}">1</option>
 									</select>
 
-								</div>
-							</div>
+                                </div>
+                            </div>
 
 
 
-							<div class="form-row">
-								<div class="form-group form-control-lg col-md-6"
-									style="padding: 0.5rem 1rem;">
-									<label for="tgbatdau">Thời gian bắt đầu</label> <input
-										type="date" class="form-control form-control-lg" id="tgbatdau"
-										th:field="*{startTime}" placeholder="Thời gian bắt đầu">
-								</div>
-								<div class="form-group form-control-lg col-md-6"
-									style="padding: 0.5rem 1rem;">
-									<label for="tgkt">Thời gian kết thúc</label> <input type="date"
-										th:field="*{endTime}" class="form-control form-control-lg"
-										id="tgkt" placeholder="Thời gian kết thúc">
-								</div>
-							</div>
+                            <div class="form-row">
+                                <div class="form-group form-control-lg col-md-6" style="padding: 0.5rem 1rem;">
+                                    <label for="tgbatdau">Thời gian bắt đầu</label> <input type="date" class="form-control form-control-lg" id="tgbatdau" th:field="*{startTime}" placeholder="Thời gian bắt đầu">
+                                </div>
+                                <div class="form-group form-control-lg col-md-6" style="padding: 0.5rem 1rem;">
+                                    <label for="tgkt">Thời gian kết thúc</label> <input type="date" th:field="*{endTime}" class="form-control form-control-lg" id="tgkt" placeholder="Thời gian kết thúc">
+                                </div>
+                            </div>
 
 
 
 
-							<div class="form-row">
-								<div class="form-group form-control-lg col-md-3"
-									style="padding: 0.5rem 1rem;">
-									<label for="dqt">Tỉ lệ điểm quá trình</label> <input
-										type="number" class="form-control form-control-lg" id="dqt"
-										th:field="*{rateProcess}" placeholder="Tỉ lệ điểm quá trình">
-								</div>
-								<div class="form-group form-control-lg col-md-3"
-									style="padding: 0.5rem 1rem;">
-									<label for="dth">Tỉ lệ điểm thực hành</label> <input
-										type="number" class="form-control form-control-lg" id="dth"
-										th:field="*{ratePractice}" placeholder="Tỉ lệ điểm thực hành">
-								</div>
-								<div class="form-group form-control-lg col-md-3"
-									style="padding: 0.5rem 1rem;">
-									<label for="dgk">Tỉ lệ điểm giữa kì</label> <input
-										type="number" class="form-control form-control-lg" id="dgk"
-										th:field="*{rateMidTerm}" placeholder="Tỉ lệ điểm giữa kì">
-								</div>
-								<div class="form-group form-control-lg col-md-3"
-									style="padding: 0.5rem 1rem;">
-									<label for="dck">Tỉ lệ điểm cuối kì</label> <input
-										type="number" class="form-control form-control-lg" id="dck"
-										th:field="*{reateEndTerm}" placeholder="Tỉ lệ điểm cuối kì">
-								</div>
-							</div>
+                            <div class="form-row">
+                                <div class="form-group form-control-lg col-md-3" style="padding: 0.5rem 1rem;">
+                                    <label for="dqt">Tỉ lệ điểm quá trình</label> <input type="number" class="form-control form-control-lg" id="dqt" th:field="*{rateProcess}" placeholder="Tỉ lệ điểm quá trình">
+                                </div>
+                                <div class="form-group form-control-lg col-md-3" style="padding: 0.5rem 1rem;">
+                                    <label for="dth">Tỉ lệ điểm thực hành</label> <input type="number" class="form-control form-control-lg" id="dth" th:field="*{ratePractice}" placeholder="Tỉ lệ điểm thực hành">
+                                </div>
+                                <div class="form-group form-control-lg col-md-3" style="padding: 0.5rem 1rem;">
+                                    <label for="dgk">Tỉ lệ điểm giữa kì</label> <input type="number" class="form-control form-control-lg" id="dgk" th:field="*{rateMidTerm}" placeholder="Tỉ lệ điểm giữa kì">
+                                </div>
+                                <div class="form-group form-control-lg col-md-3" style="padding: 0.5rem 1rem;">
+                                    <label for="dck">Tỉ lệ điểm cuối kì</label> <input type="number" class="form-control form-control-lg" id="dck" th:field="*{reateEndTerm}" placeholder="Tỉ lệ điểm cuối kì">
+                                </div>
+                            </div>
 
 
 
 
-							<div class="form-group form-control-lg">
-								<button type="submit" class="btn btn-primary btn-lg">Sign
-									in</button>
+                            <div class="form-group form-control-lg">
+                                <button type="submit" class="btn btn-primary btn-lg">Đăng ký</button>
 
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
-			<div class="col col-md-12">
-				<footer th:replace="manage/template/footer::footer"></footer>
-			</div>
-		</div>
-	</div>
+            <div class="col col-md-12">
+                <footer th:replace="manage/template/footer::footer"></footer>
+            </div>
+        </div>
+    </div>
 
 </body>
 
