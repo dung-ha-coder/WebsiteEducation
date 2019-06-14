@@ -27,7 +27,7 @@
 						<tr th:each="user, itrStat : ${listLecturer}">
 							<td th:text="${itrStat.index + 1}">1</td>
 							<td title="Xem thông tin user"><a th:text="${user.username}"
-								th:href="@{/manage/xem-thong-tin-user/}+${user.username}">user</a>
+								th:href="@{/manage/xem-thong-tin-giang-vien/}+${user.username}">user</a>
 							</td>
 							<td th:text="${user.fullname}">full name</td>
 							<td th:text="${#dates.format(user.dayOfBirth, 'dd-MM-yyyy')}">Ngày

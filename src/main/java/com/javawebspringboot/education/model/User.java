@@ -50,7 +50,7 @@ public class User implements Serializable {
 	@JoinTable(name = "user_subject", joinColumns = @JoinColumn(name = "id_user", referencedColumnName = "id_user"), inverseJoinColumns = @JoinColumn(name = "id_subject", referencedColumnName = "id_subject"))
 	private List<Subject> subjects;
 
-	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.PERSIST })
 	private List<ScoresTable> scoresTableList;
 
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)

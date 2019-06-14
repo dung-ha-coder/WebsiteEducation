@@ -16,7 +16,7 @@ import com.javawebspringboot.education.repository.CoursesGoalRepository;
 import com.javawebspringboot.education.service.AnswerService;
 
 @Service
-@Transactional
+@org.springframework.transaction.annotation.Transactional
 public class AnswerServiceImpl implements AnswerService {
 	@Autowired
 	private CoursesGoalRepository coursesGoalRepository;

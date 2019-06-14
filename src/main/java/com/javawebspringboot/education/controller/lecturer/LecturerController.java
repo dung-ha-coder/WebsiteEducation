@@ -85,16 +85,23 @@ public class LecturerController {
 		Subject subject = subjectService.findByIdSubject(idSubject);
 		model.addAttribute("subject", subject);
 		List<ScoresTable> scoresTables = scoreService.findBySubject(subject);
+		System.out.println("sixe " + scoresTables.size());
 		model.addAttribute("subjectScore", scoresTables);
+		List<String> label = new ArrayList<String>();
+		List<Float> point = new ArrayList<Float>();
+		boolean check = false;
+		if (scoresTables.size() > 0) {
+			check = scoreService.checkFullScore(scoresTables.get(0).getUser().getUsername(), subject);
 
-		if (scoresTables.size() != 0) {
-			List<String> label = new ArrayList<String>();
-			List<Float> point = new ArrayList<Float>();
-			scoreService.getDataChart(label, point, scoresTables);
-			model.addAttribute("label", label);
-			model.addAttribute("point", point);
 		}
 
+		if (scoresTables.size() != 0 && check == true) {
+
+			scoreService.getDataChart(label, point, scoresTables);
+
+		}
+		model.addAttribute("label", label);
+		model.addAttribute("point", point);
 		// doc file excel co the bi loi
 		// bi loi thi vao controller nay va lay loi tra ve view
 		if (ReadFileException.getMsgError() != "") {
@@ -123,9 +130,8 @@ public class LecturerController {
 		// xu li file
 		if (lisTableScores != null) {
 			Subject subject = subjectService.findByIdSubject(idSubject);
-			// subjectService.readData(lisTableScores, subject, cotDiem);
+			subjectService.readData(lisTableScores, subject, cotDiem);
 			boolean check = scoreService.checkFullScore(lisTableScores.get(0).getCodeStudent(), subject);
-			System.out.println("check " + check);
 			if (check == true) {
 				// day du cac cot diem
 				// tinh diem trung binh cho sinh vien
@@ -135,7 +141,7 @@ public class LecturerController {
 				// bo qua
 
 			}
-			// scoreService.saveFileExcelToDisk(fileExcel);
+			scoreService.saveFileExcelToDisk(fileExcel);
 
 		}
 		return "redirect:/lecturer/subject/{idSubject}";
@@ -205,7 +211,6 @@ public class LecturerController {
 			Subject subject = subjectService.findByIdSubject(idSubject);
 			// subjectService.readData(lisTableScores, subject, cotDiem);
 			boolean check = scoreService.checkFullScore(lisTableScores.get(0).getCodeStudent(), subject);
-			System.out.println("check " + check);
 			if (check == true) {
 				// day du cac cot diem
 				// tinh diem trung binh cho sinh vien

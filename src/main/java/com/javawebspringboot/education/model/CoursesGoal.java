@@ -41,7 +41,7 @@ public class CoursesGoal implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "coursesGoal", fetch = FetchType.LAZY)
 	private List<UserSubjectCoursesGoal> userSubjectCoursesgoalList;
 
-	@ManyToMany(mappedBy = "coursesGoalList", fetch = FetchType.LAZY)
+	@ManyToMany(mappedBy = "coursesGoalList", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.MERGE})
 	private List<Answer> answerList;
 
 	@ManyToMany

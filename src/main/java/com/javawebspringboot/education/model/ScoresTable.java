@@ -2,6 +2,7 @@ package com.javawebspringboot.education.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -39,11 +40,11 @@ public class ScoresTable implements Serializable {
 	private Float scoreAverage;
 
 	@JoinColumn(name = "id_user", referencedColumnName = "id_user")
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
 	private User user;
 
 	@JoinColumn(name = "id_subject", referencedColumnName = "id_subject")
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY , cascade = {CascadeType.MERGE, CascadeType.PERSIST})
 	private Subject subject;
 
 	public ScoresTable() {

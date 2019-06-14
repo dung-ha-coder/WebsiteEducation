@@ -16,9 +16,7 @@
 				<div class="card mb-3">
 					<div class="row no-gutters">
 						<div class="col-md-2">
-							<img
-								src="https://2sao.vietnamnetjsc.vn/images/2018/11/14/22/37/hot-girl-banh-trang-tron-3.jpg"
-								class="card-img" alt="...">
+							<img th:src="@{/common/student.jpg}" class="card-img" alt="...">
 						</div>
 						<div class="col-md-10">
 							<div class="card-body">
@@ -51,7 +49,9 @@
 					<tbody>
 						<tr th:each="subject, itrStat : ${user.subjects}">
 							<td th:text="${itrStat.index + 1}">1</td>
-							<td th:text="${subject.nameSubject}"></td>
+							<td><a th:text="${subject.nameSubject}"
+								th:href="@{/manage/xem-chuan-mon-hoc/} + ${subject.idSubject} + '/student/' + ${user.username}"></a>
+							</td>
 							<td th:text="${#dates.format(subject.startTime, 'dd-MM-yyyy')}">tg
 								bat dau</td>
 							<td th:text="${#dates.format(subject.endTime, 'dd-MM-yyyy')}">tg
@@ -81,9 +81,11 @@
 					</thead>
 					<tbody>
 						<tr th:each="score, itrStat : ${user.scoresTableList}"
-						th:classappend="${score.scoreAverage < 5.0}? 'chuadat' : 'dat' ">
+							th:classappend="${score.scoreAverage < 5.0}? 'chuadat' : 'dat' ">
 							<td th:text="${itrStat.index + 1}">1</td>
-							<td th:text="${score.subject.nameSubject}"></td>
+							<td><a th:text="${score.subject.nameSubject}"
+								th:href="@{/manage/xem-chuan-mon-hoc/} + ${score.subject.idSubject} + '/student/' + ${user.username}"></a>
+							</td>
 							<td th:text="${score.scoreProcess}">diem qua trinh</td>
 							<td th:text="${score.scorePractice}">diem thuc hanh</td>
 							<td th:text="${score.scoreMidTerm}">diem giua ki</td>
@@ -94,26 +96,29 @@
 					</tbody>
 				</table>
 			</div>
-			
-			
+
+
 			<div class="col col-md-12">
 				<h4>THÔNG TIN CÁC CHUẨN ĐẦU RA CỦA SINH VIÊN</h4>
 				<table class="table table-hover table-bordered">
 					<thead class="thead-dark">
 						<tr>
 							<th>STT</th>
+							<th>Ký hiệu</th>
 							<th>Tên chuẩn đầu ra</th>
 							<th>Tỉ lệ đạt được</th>
-							
+
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="userLO, itrStat : ${user.userLearningoutcomeList}"
-						th:classappend="${userLO.percent < 50}? 'chuadat' : 'dat' ">
+							th:classappend="${userLO.percent < 50}? 'chuadat' : 'dat' ">
 							<td th:text="${itrStat.index + 1}">1</td>
-							<td th:text="${userLO.learningOutcome.nameLearningOutcome}">Tên chuẩn đầu ra</td>
-							<td th:text="${userLO.percent}">Tỉ lệ đạt được</td>
-							
+							<td th:text="${userLO.learningOutcome.sign}"></td>
+							<td th:text="${userLO.learningOutcome.nameLearningOutcome}">Tên
+								chuẩn đầu ra</td>
+							<td th:text="${userLO.percent} +'%'">Tỉ lệ đạt được</td>
+
 						</tr>
 
 					</tbody>

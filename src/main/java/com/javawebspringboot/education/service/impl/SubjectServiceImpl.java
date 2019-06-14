@@ -267,6 +267,8 @@ public class SubjectServiceImpl implements SubjectService {
 		// tao Map chua key la CoursesGoal va value la %G dat duoc
 		Map<CoursesGoal, Float> coursesGoalMap = new HashMap<>();
 
+		for (Answer answer : answerList) {
+		}
 		// tung dong du lieu trong table da duoc luu tru trong listTableScore
 		// lap tung phan tu trong listTableScore <=> lay dong trong table
 		// listTableScore duoc luu tru nhu sau

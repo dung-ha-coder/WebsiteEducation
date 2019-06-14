@@ -12,8 +12,54 @@
 	<div class="app-content">
 		<div class="row">
 			<div class="col col-md-12">
-				<h4>Thong tin</h4>
+				<h4>THÔNG TIN GIẢNG VIÊN</h4>
+				<div class="card mb-3">
+					<div class="row no-gutters">
+						<div class="col-md-2">
+							<img th:src="@{/common/student.jpg}" class="card-img" alt="...">
+						</div>
+						<div class="col-md-10">
+							<div class="card-body">
+								<p class="card-text" th:text="'Username: ' + ${user.username}">Card
+									title</p>
+								<p class="card-text" th:text="'Fullname: ' + ${user.fullname}">onger.</p>
+								<p class="card-text"
+									th:text="'Ngày sinh: ' +  ${#dates.format(user.dayOfBirth, 'dd-MM-yyyy')}">Last
+									updated 3 mins ago</p>
+							</div>
+						</div>
+					</div>
+				</div>
 
+			</div>
+
+			<div class="col col-md-12">
+				<h4>THÔNG TIN MÔN HỌC</h4>
+				<table class="table table-hover table-bordered">
+					<thead class="thead-dark">
+						<tr>
+							<th>STT</th>
+							<th>Tên môn học</th>
+							<th>Thời gian bắt đầu</th>
+							<th>Thời gian kết thúc</th>
+							<th>Số tín chỉ</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="subject, itrStat : ${user.subjects}">
+							<td th:text="${itrStat.index + 1}">1</td>
+							<td th:text="${subject.nameSubject}"> 
+							</td>
+							<td th:text="${#dates.format(subject.startTime, 'dd-MM-yyyy')}">tg
+								bat dau</td>
+							<td th:text="${#dates.format(subject.endTime, 'dd-MM-yyyy')}">tg
+								bat dau</td>
+							<td th:text="${subject.numberOfCredits}"></td>
+
+						</tr>
+
+					</tbody>
+				</table>
 			</div>
 
 			<div class="col col-md-12">

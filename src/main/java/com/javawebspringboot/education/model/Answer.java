@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -34,10 +35,12 @@ public class Answer implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Subject subject;
 
-	@JoinTable(name = "answer_coursesgoal", joinColumns = {
-			@JoinColumn(name = "id_answer", referencedColumnName = "id_answer") }, inverseJoinColumns = {
+	@JoinTable(name = "answer_coursesgoal", 
+			joinColumns = {
+			@JoinColumn(name = "id_answer", referencedColumnName = "id_answer") },
+			inverseJoinColumns = {
 					@JoinColumn(name = "id_coursesgoal", referencedColumnName = "id_course_goal") })
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private List<CoursesGoal> coursesGoalList;
 
 	@Column(name = "content_answer")
