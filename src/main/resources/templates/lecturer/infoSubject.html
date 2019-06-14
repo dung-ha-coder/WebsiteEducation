@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head th:replace="lecturer/template/head::head"></head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav th:replace="lecturer/template/nav::nav"></nav>
+    <header th:replace="lecturer/template/header::header"></header>
+    <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div th:replace="lecturer/template/sidebar::sidebar"></div>
+            </div>
+            <!-- Post Content Column -->
+            <div class="col-lg-8">
+
+                <div class="card mt-2 monhoc">
+                    <h5 class="card-header">Thông tin về đề thi môn học</h5>
+                    <div class="card-body">
+
+                        <table class="table table-hover table-bordered">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Tên kì thi</th>
+                                    <th>Nội dung câu hỏi</th>
+                                    <th>Sửa</th>
+                                    <th>Xóa</th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="answer, itrStat : ${subject.answerList}">
+                                    <td th:text="${itrStat.index + 1}">1</td>
+
+                                    <td th:if="${answer.idExam == 1}">Điểm quá trình</td>
+                                    <td th:if="${answer.idExam == 2}">Điểm thực hành</td>
+                                    <td th:if="${answer.idExam == 3}">Điểm giữa kì</td>
+                                    <td th:if="${answer.idExam == 4}">Điểm cuối kì</td>
+                                    <td th:text="${answer.contentAnswer}">ma mon hoc</td>
+                                    <td><a class="btn btn-success" th:href="@{/lecturer/sua-cau-hoi/subject/}  + ${subject.idSubject} + '/answer/' + ${answer.idAnswer}">Sửa</a>
+                                    </td>
+                                    <td><a class="btn btn-danger" th:href="@{/lecturer/xoa-cau-hoi/subject/} + ${subject.idSubject} + '/answer/' + ${answer.idAnswer}">Xóa</a>
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+
+
+                <div class="card mt-2 monhoc">
+                    <h5 class="card-header">Thêm câu hỏi</h5>
+                    <div class="card-body p-3">
+
+                        <form th:action="@{/lecturer/them-cau-hoi/subject/} + ${subject.idSubject}" method="post">
+
+
+                            <div class="form-group">
+                                <label for="kithi">Chọn kì thi</label> <select class="form-control" id="kithi" name="idExam">
+                                    <option value="1">Điểm quá trình</option>
+                                    <option value="2">Thi thực hành</option>
+                                    <option value="3">Thi giữa kì</option>
+                                    <option value="4">Thi cuối kì</option>
+                                </select>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="contentAnswer">Nhập nội dung câu hỏi</label>
+                                <textarea class="form-control" name="contentAnswer" id="contentAnswer" style="font-size: 17px;" rows="2"></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Thêm mới</button>
+
+                        </form>
+                    </div>
+                </div>
+
+
+
+
+
+
+                <div class="card mt-2 monhoc">
+                    <h5 class="card-header" th:text="'Thông tin môn học ' + ${#strings.toLowerCase(subject.nameSubject)}">Thêm câu hỏi</h5>
+                    <div class="card-body">
+
+                        <table class="table table-hover table-bordered">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Kí hiệu</th>
+                                    <th>Tên chuẩn</th>
+                                    <th>Sửa</th>
+                                    <th>Xóa</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="g, itrStat : ${coursesGoalList}">
+                                    <td th:text="${itrStat.index + 1}">1</td>
+                                    <td th:text="${g.sign}"></td>
+                                    <td th:text="${g.nameCoursesGoal}">ma mon hoc</td>
+                                    <td><a class="btn btn-success" th:href="@{/lecturer/chinh-sua-g/subject/}  + ${subject.idSubject} +'/coursesgoal/' +${g.idCoursesGoal} ">Sửa</a></td>
+                                    <td><a class="btn btn-danger" th:href="@{/lecturer/xoa-g/subject/} + ${subject.idSubject} +'/coursesgoal/' +${g.idCoursesGoal} ">Xóa</a></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+
+
+                <div class="card my-2 monhoc">
+                    <h5 class="card-header">Thêm mục tiêu môn học(G) mới</h5>
+                    <div class="card-body p-3">
+                        <form th:action="@{/lecturer/them-g-moi/subject/} + ${subject.idSubject}" method="post">
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Nhập mục tiêu môn
+                                    học</label>
+                                <textarea name="txtG" class="form-control" id="exampleFormControlTextarea1" style="font-size: 17px;" rows="3"></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Thêm mới</button>
+
+                        </form>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <footer>
+        <div th:replace="lecturer/template/footer::footer"></div>
+    </footer>
+
+
+</body>
+
+</html>

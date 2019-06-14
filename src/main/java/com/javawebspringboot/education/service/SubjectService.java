@@ -20,14 +20,16 @@ public interface SubjectService {
 
     List<Subject> findAllByOrderByStartTimeAsc();
 
-    void newSubject(Subject subject);
+	void newSubject(Subject subject, Integer idDepartment);
 
     void saveAnswer(Integer idSubject, Integer idExam, String contentAnswer);
 
-    List<Subject> findByTeacher(User user);
+    List<Subject> findAllSubjectBy(User user);
 
     List<Subject> registerSubject();
 
     public void dowloadFile(Integer idSubject, String strCotDiem, HttpServletResponse response);
+
+	List<Subject> findByDepartmentOrderByStartTimeAsc(Integer idDepartment);
 
 }

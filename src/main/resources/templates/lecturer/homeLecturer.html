@@ -18,7 +18,7 @@
             <div class="col-lg-8">
 
                 <div class="card mt-2 monhoc">
-                    <h5 class="card-header">Danh sách các môn học</h5>
+                    <h5 class="card-header">Danh sách các môn học đang giảng dạy</h5>
 
                 </div>
 
@@ -32,6 +32,9 @@
 
                         <p style="margin: 0px" th:text="'Thời gian bắt đầu: '+${#dates.format(subject.startTime, 'dd-MM-yyyy')}">tg bat dau</p>
                         <p style="margin: 0px" th:text="'Thời gian bắt đầu: '+${#dates.format(subject.endTime, 'dd-MM-yyyy')}">tg ket thuc</p>
+                        <p style="margin: 0px" th:text="'Giáo viên lý thuyết: ' + ${subject.teacher.username}">Số tín chỉ: 4</p>
+                        <p style="margin: 0px" th:text="'Giáo viên thực hành: ' + ${subject.practiceTeacher.username}">Số tín chỉ: 4</p>
+
                         <p style="margin: 0px" th:text="'Số tín chỉ: ' + ${subject.numberOfCredits}">Số tín chỉ: 4</p>
                     </div>
                 </div>

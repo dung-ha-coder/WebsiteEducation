@@ -38,7 +38,7 @@
 								<td th:text="${itrStat.index + 1}">1</td>
 								<td title="Xem thông tin user"><a
 									th:text="${user.username}"
-									th:href="@{/manage/xem-thong-tin-sinh-vien/}+${user.username}">user</a>
+									th:href="@{/lecturer/xem-thong-tin-giang-vien/}+${user.username}">user</a>
 								</td>
 								<td th:text="${user.fullname}">full name</td>
 								<td th:text="${#dates.format(user.dayOfBirth, 'dd-MM-yyyy')}">Ngày
@@ -72,7 +72,7 @@
 								<td th:text="${itrStat.index + 1}">1</td>
 								<td title="Xem thông tin user"><a
 									th:text="${user.username}"
-									th:href="@{/manage/xem-thong-tin-sinh-vien/}+${user.username}">user</a>
+									th:href="@{/lecturer/xem-thong-tin-sinh-vien/}+${user.username}">user</a>
 								</td>
 								<td th:text="${user.fullname}">full name</td>
 								<td th:text="${#dates.format(user.dayOfBirth, 'dd-MM-yyyy')}">Ngày

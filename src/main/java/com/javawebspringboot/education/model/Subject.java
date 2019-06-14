@@ -130,6 +130,25 @@ public class Subject implements Serializable {
 		this.department = department;
 	}
 
+	
+	
+	public Subject(String nameSubject, String codeSubject, Date startTime, Date endTime, Float rateProcess,
+			Float ratePractice, Float rateMidTerm, Float reateEndTerm, Integer numberOfCredits, User teacher,
+			User practiceTeacher) {
+		super();
+		this.nameSubject = nameSubject;
+		this.codeSubject = codeSubject;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.rateProcess = rateProcess;
+		this.ratePractice = ratePractice;
+		this.rateMidTerm = rateMidTerm;
+		this.reateEndTerm = reateEndTerm;
+		this.numberOfCredits = numberOfCredits;
+		this.teacher = teacher;
+		this.practiceTeacher = practiceTeacher;
+	}
+
 	public User getPracticeTeacher() {
 		return practiceTeacher;
 	}

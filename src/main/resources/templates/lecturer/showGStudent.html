@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head th:replace="lecturer/template/head::head"></head>
+
+<body>
+
+	<!-- Navigation -->
+	<nav th:replace="lecturer/template/nav::nav"></nav>
+	<header th:replace="lecturer/template/header::header"></header>
+	<!-- Page Content -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4">
+				<div th:replace="lecturer/template/sidebar::sidebar"></div>
+			</div>
+			<!-- Post Content Column -->
+			<div class="col-lg-8">
+
+				<div class="card mt-2 monhoc">
+					<h5 class="card-header" th:text="'Danh sách các chuẩn môn học của sinh viên ' + ${sinhVien.username} "></h5>
+
+				</div>
+
+				<div class="card mt-1">
+					<div class="card-body card_body_monhoc p-0">
+						<table class="table table-hover table-bordered">
+							<thead class="thead-light">
+								<tr>
+									<th>STT</th>
+									<th>Kí hiêu</th>
+									<th>Tên chuẩn môn học</th>
+
+									<th>Tỉ lệ đạt được</th>
+									<th>Đánh giá</th>
+
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="usg, itrStat : ${listGStudent}"
+								th:classappend="${usg.percent <50.0} ? 'chuadat' : 'dat' ">
+									<td th:text="${itrStat.index + 1}">1</td>
+									<td th:text="${usg.coursesGoal.sign}"></td>
+									<td th:text="${usg.coursesGoal.nameCoursesGoal}"></td>
+									
+									<td th:if="${usg.percent !=null}" th:text="${usg.percent} + '%'"></td>
+									<td th:if="${usg.percent ==null}" th:text="'-'"></td>
+									<td th:if="${usg.percent >= 50}" th:text="'Đạt'">Đánh giá</td>
+									<td th:if="${usg.percent < 50}" th:text="'Chưa Đạt'">Đánh
+										giá</td>
+
+								</tr>
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<!-- /.row -->
+
+	</div>
+	<!-- /.container -->
+
+	<!-- Footer -->
+	<footer>
+		<div th:replace="lecturer/template/footer::footer"></div>
+	</footer>
+
+
+</body>
+
+</html>

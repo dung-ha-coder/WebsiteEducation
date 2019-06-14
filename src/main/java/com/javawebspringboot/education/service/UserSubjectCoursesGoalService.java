@@ -12,4 +12,5 @@ public interface UserSubjectCoursesGoalService {
 
 	List<UserSubjectCoursesGoal> findByUserAndSubjectOrderByCoursesGoalAsc(User user, Subject subject);
 
+
 }

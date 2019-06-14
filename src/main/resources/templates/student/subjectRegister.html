@@ -30,8 +30,8 @@
                                     <a th:href="@{/chuan-mon-hoc/subject/} + ${subject.idSubject}" th:text="${subject.nameSubject}">Tối ưu hóa công cụ tìm kiếm
                                         - IE204.J21</a>
                                 </h4>
-                                <p style="margin: 0px">Giáo viên giảng dạy: adsfads</p>
-                                <p style="margin: 0px">Giáo viên thực hành: adsfads</p>
+                                <p style="margin: 0px" th:text=" 'Giáo viên giảng dạy: ' + ${subject.teacher.username} ">Giáo viên giảng dạy: adsfads</p>
+                                <p style="margin: 0px" th:if="${subject.practiceTeacher.username !=null}" th:text="'Giáo viên thực hành: ' +${subject.practiceTeacher.username} ">Giáo viên thực hành: adsfads</p>
                                 <p style="margin: 0px">Số tín chỉ: 4</p>
                             </div>
                             <div class="ml-auto bd-highlight">

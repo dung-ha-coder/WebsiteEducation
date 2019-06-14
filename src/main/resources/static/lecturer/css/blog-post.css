@@ -3,77 +3,72 @@
  * Copyright 2013-2019 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-blog-post/blob/master/LICENSE)
  */
+
 body {
-	padding-top: 56px;
-	background: #e6e6e6;
+    padding-top: 56px;
+    background: #e6e6e6;
 }
 
 .monhoc p {
-	margin-bottom: 0px;
+    margin-bottom: 0px;
 }
 
-
-
 a:hover {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 nav a {
-	color: white;
+    color: white;
 }
 
 .sidebar_menu li {
-	
-	padding:10px 20px;
-	font-weight: 500;
-	cursor: pointer;
+    padding: 10px 20px;
+    font-weight: 500;
+    cursor: pointer;
 }
 
 .sidebar_menu li a {
-	font-size: 18px;
+    font-size: 18px;
 }
 
 .sidebar_menu li:hover {
-	background-color: #c5c2c2;
+    background-color: #c5c2c2;
 }
 
-.card-header{
-	padding: 15.5px 20px;
+.card-header {
+    padding: 15.5px 20px;
 }
 
-
-
-
-.monhoc .card-body{
-
-	padding: 0px;
+.monhoc .card-body {
+    padding: 0px;
 }
 
-.monhoc button{
-	font-size: 20px;
-	padding: 0px;
-	font-weight: 500;
+.monhoc table {
+    margin-bottom: 0px;
 }
 
-
-.monhoc table{
-	margin-bottom: 0px;
-}
 .card-body.card_body_monhoc:hover {
-    background: rgba(0,0,0,.03);;
+    background: rgba(0, 0, 0, .03);
+    ;
 }
 
-.subject .card-header{
-	padding: 12px 20px;
+.subject .card-header {
+    padding: 12px 20px;
 }
 
-.subject .btn, .btn-link{
-	color: black;
-	text-decoration: none;
+.subject .btn,
+.btn-link {
+    color: black;
+    text-decoration: none;
 }
 
-.subject .btn:active, .btn-link:active, .btn:hover, .btn-link:hover, .btn:focus, .btn-link:focus{
-	text-decoration: none;
+.subject .btn:active,
+.btn-link:active,
+.btn:hover,
+.btn-link:hover,
+.btn:focus,
+.btn-link:focus {
+    text-decoration: none;
 }
 
 header .img-fluid {
@@ -82,34 +77,18 @@ header .img-fluid {
 }
 
 .card_body_monhoc:hover {
-	background: rgba(0,0,0,.03);
+    background: rgba(0, 0, 0, .03);
 }
 
-table td{
-	vertical-align: middle;
+table td {
+    vertical-align: middle;
 }
 
-.chuadat{
-	background: #ffd3d3;
+.chuadat {
+    background: #ffd3d3;
 }
 
-.table{
-	background-color:white;
-	margin-bottom: 0rem;
+.table {
+    background-color: white;
+    margin-bottom: 0rem;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

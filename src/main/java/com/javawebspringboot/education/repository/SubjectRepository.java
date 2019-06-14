@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.javawebspringboot.education.model.Department;
 import com.javawebspringboot.education.model.Subject;
 import com.javawebspringboot.education.model.User;
 import java.util.Date;
@@ -21,9 +22,11 @@ public interface SubjectRepository extends JpaRepository<Subject, Integer> {
 
     List<Subject> findAllByOrderByStartTimeAsc();
 
-    List<Subject> findByTeacher(User user);
+    List<Subject> findByTeacherOrPracticeTeacher(User teacher, User practiceTeacher);
 
     List<Subject> findByStartTimeLessThan(Date date);
 
     List<Subject> findByStartTimeGreaterThan(Date date);
+    
+    List<Subject> findByDepartmentOrderByStartTimeAsc(Department department);
 }

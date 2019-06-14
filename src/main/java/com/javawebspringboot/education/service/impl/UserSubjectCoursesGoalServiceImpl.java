@@ -20,6 +20,8 @@ public class UserSubjectCoursesGoalServiceImpl implements UserSubjectCoursesGoal
 	@Autowired
 	private UserSubjectCoursesGoalRepository userSubjectCoursesGoalRepository;
 
+
+
 	@Override
 	public List<UserSubjectCoursesGoal> findByUserAndSubject(User user, Subject subject) {
 
@@ -31,5 +33,7 @@ public class UserSubjectCoursesGoalServiceImpl implements UserSubjectCoursesGoal
 	public List<UserSubjectCoursesGoal> findByUserAndSubjectOrderByCoursesGoalAsc(User user, Subject subject) {
 		return userSubjectCoursesGoalRepository.findByUserAndSubjectOrderByCoursesGoalAsc(user, subject);
 	}
+
+	
 
 }

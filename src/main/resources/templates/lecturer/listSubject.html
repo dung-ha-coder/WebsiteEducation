@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head th:replace="lecturer/template/head::head"></head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav th:replace="lecturer/template/nav::nav"></nav>
+    <header th:replace="lecturer/template/header::header"></header>
+    <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div th:replace="lecturer/template/sidebar::sidebar"></div>
+            </div>
+            <!-- Post Content Column -->
+            <div class="col-lg-8">
+
+                <div class="card my-2 monhoc">
+                    <h5 class="card-header">Danh sách môn học của khoa</h5>
+
+                </div>
+
+                <div class="card my-2">
+                    <table class="table table-hover table-bordered">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>STT</th>
+                                <th>Tên môn học</th>
+                                <th>Mã môn học</th>
+                                <th>Giáo viên lý thuyết</th>
+                                <th>Giáo viên thực hành</th>
+                                <th>Ngày bắt đầu</th>
+                                <th>Ngày kết thúc</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="subject, itrStat : ${listSubject}">
+                                <td th:text="${itrStat.index + 1}">1</td>
+                                <td>
+                                    <a th:text="${subject.nameSubject}" th:href="@{/lecturer/xem-thong-tin-mon-hoc/} + ${subject.idSubject}">ten mon hoc</a>
+                                </td>
+                                <td th:text="${subject.codeSubject}"></td>
+                                <td th:text="${subject.teacher.username}"></td>
+                                <td th:text="${subject.practiceTeacher.username}"></td>
+                                <td th:text="${#dates.format(subject.startTime, 'dd-MM-yyyy')}"></td>
+                                <td th:text="${#dates.format(subject.endTime, 'dd-MM-yyyy')}"></td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <footer>
+        <div th:replace="lecturer/template/footer::footer"></div>
+    </footer>
+
+
+</body>
+
+</html>
