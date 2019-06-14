@@ -605,4 +605,10 @@ public class SubjectServiceImpl implements SubjectService {
 		return subjectRepository.findByDepartmentOrderByStartTimeAsc(department);
 	}
 
+	@Override
+	public List<Subject> findByTeacherOrPracticeTeacher(User teacher, User practiceTeacher) {
+		// TODO Auto-generated method stub
+		return subjectRepository.findByTeacherOrPracticeTeacher(teacher, practiceTeacher);
+	}
+
 }

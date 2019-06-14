@@ -32,4 +32,5 @@ public interface SubjectService {
 
 	List<Subject> findByDepartmentOrderByStartTimeAsc(Integer idDepartment);
 
+	 List<Subject> findByTeacherOrPracticeTeacher(User teacher, User practiceTeacher);
 }

@@ -99,6 +99,7 @@ public class ManageController {
 	public String showInfoLecturer(Model model, @PathVariable(name = "username") String username) {
 		User user = userService.findByUsername(username);
 		model.addAttribute("user", user);
+		model.addAttribute("listSubject", subjectService.findByTeacherOrPracticeTeacher(user, user));
 		return "manage/infoLecturer";
 	}
 

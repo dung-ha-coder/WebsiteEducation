@@ -46,7 +46,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="subject, itrStat : ${user.subjects}">
+						<tr th:each="subject, itrStat : ${listSubject}">
 							<td th:text="${itrStat.index + 1}">1</td>
 							<td th:text="${subject.nameSubject}"> 
 							</td>
