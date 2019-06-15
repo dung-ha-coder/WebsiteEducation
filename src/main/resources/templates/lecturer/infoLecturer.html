@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head th:replace="lecturer/template/head::head"></head>
+
+<body>
+
+	<!-- Navigation -->
+	<nav th:replace="lecturer/template/nav::nav"></nav>
+	<header th:replace="lecturer/template/header::header"></header>
+	<!-- Page Content -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4">
+				<div th:replace="lecturer/template/sidebar::sidebar"></div>
+			</div>
+			<!-- Post Content Column -->
+			<div class="col-lg-8">
+
+				<div class="card mt-2 monhoc">
+					<h5 class="card-header"
+						th:text="'Thông tin giảng viên ' +${lecturer.fullname}"></h5>
+
+				</div>
+				<div class="card">
+					<div class="row">
+						<div class="col col-md-4">
+							<img th:src="@{/common/student.jpg}" class="img-fluid" />
+
+						</div>
+
+						<div class="col col-md-8 card-body thong_tin_user">
+							<p th:text=" 'Họ và tên: ' +${lecturer.fullname} ">Fullname:
+								Ha Tien Dung</p>
+							<p
+								th:text=" 'Ngày sinh: ' + ${#dates.format(lecturer.dayOfBirth, 'dd-MM-yyyy')}">
+								Ngay sinh: 222222</p>
+							<p
+								th:text=" 'Khoa quản lý: ' + ${lecturer.department.nameDepartment} ">Khoa:
+								Cong nghe thong tin</p>
+
+						</div>
+					</div>
+				</div>
+
+
+				<div class="card mt-2 monhoc">
+					<h5 class="card-header"
+						th:text="'Thông các môn học giảng dạy của giảng viên ' +${lecturer.fullname}"></h5>
+
+				</div>
+				<div class="card">
+
+					<table class="table table-hover table-bordered">
+						<thead class="thead-dark">
+							<tr>
+								<th>STT</th>
+								<th>Tên môn học</th>
+								<th>Thời gian bắt đầu</th>
+								<th>Thời gian kết thúc</th>
+								<th>Số tín chỉ</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="subject, itrStat : ${listSubject}">
+								<td th:text="${itrStat.index + 1}">1</td>
+								<td th:text="${subject.nameSubject}"></td>
+								<td th:text="${#dates.format(subject.startTime, 'dd-MM-yyyy')}">tg
+									bat dau</td>
+								<td th:text="${#dates.format(subject.endTime, 'dd-MM-yyyy')}">tg
+									bat dau</td>
+								<td th:text="${subject.numberOfCredits}"></td>
+
+							</tr>
+
+						</tbody>
+					</table>
+
+				</div>
+
+
+
+			</div>
+
+		</div>
+
+	</div>
+	<!-- /.row -->
+
+	<!-- /.container -->
+
+	<!-- Footer -->
+	<footer>
+		<div th:replace="lecturer/template/footer::footer"></div>
+	</footer>
+
+
+</body>
+
+</html>

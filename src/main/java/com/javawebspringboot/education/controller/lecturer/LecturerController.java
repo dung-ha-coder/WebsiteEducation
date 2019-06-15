@@ -185,6 +185,7 @@ public class LecturerController {
 
 		// tim ds user
 		Department department = departmentService.findByIdDepartment(idDepartment);
+		model.addAttribute("strName", department.getNameDepartment());
 		model.addAttribute("listLecturer", userService.findByDepartmentAndRoleListLecturer(department));
 		model.addAttribute("listStudent", userService.findByDepartmentAndRoleListStudent(department));
 
@@ -513,4 +514,20 @@ public class LecturerController {
 		model.addAttribute("avg", scoreService.scoreAvg(sinhVien));
 		return "lecturer/infoStudentInLivingClass";
 	}
+	
+	@RequestMapping("/lecturer/xem-thong-tin-giang-vien/{username}")
+	public String infoLecturer(Model model, @PathVariable(name="username") String username) {
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		User user = userService.findByUsername(userDetails.getUsername());
+		model.addAttribute("user", user);
+		// menu
+
+		User lecturer = userService.findByUsername(username);
+		model.addAttribute("lecturer", lecturer);
+		model.addAttribute("listSubject", subjectService.findByTeacherOrPracticeTeacher(lecturer, lecturer));
+		return "lecturer/infoLecturer";
+	}
+	
+	
+	
 }
